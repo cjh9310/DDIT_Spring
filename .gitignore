@@ -1,0 +1,8 @@
+/.metadata/
+/Servers/
+*.txt
+*.xml
+*.png
+/*/.settings
+*.MF
+*.class

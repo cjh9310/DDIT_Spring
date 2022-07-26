@@ -18,7 +18,7 @@ public class ParamServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/param.jsp").forward(request, response);
 		
-		
+	
 	}
 
 	

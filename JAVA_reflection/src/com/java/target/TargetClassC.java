@@ -1,6 +1,6 @@
 package com.java.target;
 
-public class TargetClass {
+public class TargetClassC {
 	
 	
 	public void a() {
@@ -10,9 +10,7 @@ public class TargetClass {
 		System.out.println(str);
 	}
 	
-	public void b() {
-		System.out.println("b method");
-	}
+	
 	public void c() {
 		System.out.println("c method");
 	}

@@ -10,6 +10,9 @@ import com.jsp.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO{
 	
+	
+	
+	
 	private SqlSessionFactory sqlSessionFactory;	
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;

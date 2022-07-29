@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+	<!-- datasource -->
+	<bean id = "sqlSessionFactory"
+		  class = "com.jsp.datasource.OracleMybatisSqlSessionFactory" />
+	<!--  Repository -->
+	<bean id = "memberDAO" class="com.jsp.dao.MemberDAOImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<!-- property name에서 set이라는 메소드를 sqlSessionFactory를 이용하여 invoke를 할 것이다. -->
+		<!--  name자리에는 set메소드 인 것을 기억해두자 -->	
+	</bean>
+	<!-- Service -->
+	<bean id = "memberService" class="com.jsp.service.MemberServiceImpl" >
+		<property name="memberDAO" ref-value="memberDAO" />
+	</bean>
+</beans>

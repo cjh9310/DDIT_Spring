@@ -28,7 +28,7 @@ public class InitApplicationContextServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 //   경로를 가져오기 -----------------------------------------------------------------------------
 		String beanConfigXml = config.getInitParameter("contextConfigLocation");
-		//System.out.println(beanConfigXml);++++++++++++++++++++++++++++++++++++++++++++++zxx
+		//System.out.println(beanConfigXml);++++++++++++++++++++++++++++++++++++++++++++++
 		
 		if (beanConfigXml == null) return;
 		
@@ -85,8 +85,8 @@ public class InitApplicationContextServlet extends HttpServlet {
 						
 						if(property.getNodeType() == Node.ELEMENT_NODE) {
 							Element ele = (Element) property;
-							String name = ele.getAttribute("name");
-							String ref = ele.getAttribute("ref-value");
+							String name = ele.getAttribute("name");  // set 메소드에 대한 정보를 담고 있는 "name"
+							String ref = ele.getAttribute("ref-value"); // 맵에다 저장한 key 값을 꺼내서 파라미터로 dao에 넣어주는 역할 = "ref-value"
 							
 //							System.out.printf("name = %s, ref-value=%s\n",name,ref);
 							

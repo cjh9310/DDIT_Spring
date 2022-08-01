@@ -1,8 +1,12 @@
 /.metadata/
 /Servers/
 *.txt
-*.xml
+*.jar
 *.png
 /*/.settings
 *.MF
+*/build/
+**/JSP_command_bootstrap2/**
+**/JSP_command_bootstrap/**/resources/**
+**/JSP_bootstrap/**/resources/**
 *.class

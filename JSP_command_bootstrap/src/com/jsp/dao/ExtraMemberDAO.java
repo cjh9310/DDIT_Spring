@@ -14,4 +14,5 @@ public interface ExtraMemberDAO extends MemberDAO{
 	
 	// 회원정보 삭제
 	public void deleteMember(String id) throws SQLException;
+
 }

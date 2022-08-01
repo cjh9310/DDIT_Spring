@@ -10,8 +10,17 @@
 		<!-- property name에서 set이라는 메소드를 sqlSessionFactory를 이용하여 invoke를 할 것이다. -->
 		<!--  name자리에는 set메소드 인 것을 기억해두자 -->	
 	</bean>
+		<bean id = "extraMemberDAO" class="com.jsp.dao.ExtraMemberDAOImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="memberDAO" ref-value="memberDAO" />
+	</bean>
 	<!-- Service -->
 	<bean id = "memberService" class="com.jsp.service.MemberServiceImpl" >
 		<property name="memberDAO" ref-value="memberDAO" />
 	</bean>
+	<bean class="com.jsp.service.ExtraMemberServiceImpl" id="extraMemberService">
+		<property ref-value="memberService" name="memberService"/>
+		<property ref-value="extraMemberDAO" name="extraMemberDAO"/>
+	</bean>
 </beans>
+

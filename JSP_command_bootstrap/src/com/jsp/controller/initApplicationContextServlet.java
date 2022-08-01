@@ -42,7 +42,7 @@ public class InitApplicationContextServlet extends HttpServlet {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-			Document document = documentBuilder.parse(beanConfigXml);
+			Document document = documentBuilder.parse(beanConfigXml);  // documentBuilder물리적 경로를 받아서 앞에도 적어줌. WEB-INF/classes/ 가 들어간 이유
 			
 			Element root = document.getDocumentElement();
 			

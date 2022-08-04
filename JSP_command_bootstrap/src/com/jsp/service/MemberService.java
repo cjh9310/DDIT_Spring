@@ -1,7 +1,7 @@
 package com.jsp.service;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
 import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
@@ -9,7 +9,7 @@ import com.jsp.dto.MemberVO;
 public interface MemberService {
 	
 	//회원목록조회
-	List<MemberVO> getMemberList(Criteria cri)throws SQLException;
+	Map<String,Object> getMemberList(Criteria cri)throws SQLException;
 	
 	//회원상세조회
 	MemberVO getMember(String id)throws SQLException;	

@@ -22,7 +22,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DispatcherServlet</servlet-name>
-		<url-pattern>*.do</url-pattern> <!--  .jsp빼고 나머지는 / 가 받음       이게 뭐냐?   .jsp랑 / 는 기본 서블릿이 존재한다. -->
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 

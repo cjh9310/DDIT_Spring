@@ -9,6 +9,8 @@ import com.jsp.dto.MemberVO;
 public interface MemberDAO {
 	
 	List<MemberVO> selectMemberList(Criteria cri)throws SQLException;
+	int selectMemberListCount(Criteria cri)throws SQLException;
+	
 	MemberVO selectMemberById(String id)throws SQLException;
 	
 	

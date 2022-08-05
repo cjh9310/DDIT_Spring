@@ -56,32 +56,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
    	<section class="content">
    		<div class="card">
    			<div class="card-header with-border">
-   				<button type="button" class="btn btn-primary" onclick="" >회원등록</button>
+   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do','회원등록',600,700);" >회원등록</button>
    				<div id="keyword" class="card-tools" style="width:550px;">
    					 <div class="input-group row">
    					 	<!-- search bar -->
    					 	<!-- sort num -->
-					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">					  		  		
-					  		<option value="2">정렬개수</option>
-					  		<option value="2" >2개씩</option>
-					  		<option value="3" >3개씩</option>
-					  		<option value="5" >5개씩</option>
-					  		
+					  		<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">					  		  		
+					  		<option value="10" ${cri.perPageNum eq 10 ? 'selected' : '' } >정렬개수</option>
+					  		<option value="2" ${cri.perPageNum eq 2 ? 'selected' : '' }>2개씩</option>
+					  		<option value="3" ${cri.perPageNum eq 3 ? 'selected' : '' }>3개씩</option>
+					  		<option value="5" ${cri.perPageNum eq 5 ? 'selected' : '' }>5개씩</option>
 					  	</select>
 					  	
 					  	
 					  	<!-- search bar -->
 					 	<select class="form-control col-md-3" name="searchType" id="searchType">
 					 		<option value=""  >검색구분</option>
-							<option value="i" >아이디</option>
-							<option value="n" >이 름</option>
-							<option value="p" >전화번호</option>
-							<option value="e" >이메일</option>	
+							<option value="i" ${param.searchType=='i' ? "selected":"" } >아이디</option>
+							<option value="n" ${param.searchType=='n' ? "selected":"" }>이 름</option>
+							<option value="p" ${param.searchType=='p' ? "selected":"" }>전화번호</option>
+							<option value="e" ${param.searchType=='e' ? "selected":"" }>이메일</option>	
 											 									
 						</select>
 						<!-- keyword -->
-   					 	<input  class="form-control" type="text" name="keyword" 
-										placeholder="검색어를 입력하세요." value=""/>
+   					 	<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
 						<span class="input-group-append">
 							<button class="btn btn-primary" type="button" 
 									id="searchBtn" data-card-widget="search" onclick="list_go(1);">
@@ -194,6 +192,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			method:'get'
 		}).submit(); 
 	}
+
+</script>	
+
+<script>	
+	
+//팝업창들 뛰우기
+//새로운 Window창을 Open할 경우 사용되는 함수 ( arg : 주소 , 창타이틀 , 넓이 , 길이 )
+function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
+	winleft = (screen.width - WinWidth) / 2;
+	wintop = (screen.height - WinHeight) / 2;
+	var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth +", " 
+							+"height="+ WinHeight +", top="+ wintop +", left=" 
+							+ winleft +", resizable=yes, status=yes"  );
+	win.focus() ; 
+}
+
 </script>
 
 <!-- jQuery -->

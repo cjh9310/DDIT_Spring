@@ -171,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<input type="hidden" name="checkUpload" value="0" />	
 </form>
 
-<script> // 비동기로 업로드 하기      (서버는 동기 비동기 구분 못함 )
+<script> // 비동기로 파일 업로드 하기      (서버는 동기 비동기 구분 못함 )
 	function picture_go(){
 		//alert("file change");
 		var form = $('form[role="imageForm"]');
@@ -226,6 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			return;
 		}
 		
+		
 		var formData = new FormData($('form[role="imageForm"]')[0]);
 		$.ajax({
 			url:"picture.do",
@@ -234,6 +235,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		processData:false,
 		contentType:false,
 		success:function(data){
+			
+			// 업로드 확인변수 세팅
+			$('input[name="checkUpload"]'.val(1));
+			// 저장된 파일명 저장
+			$('input#oldFile').val(data); // 변경시 삭제될 파일명
+			$('form[role="form"] input[name="picture"]').val(data);
+			alert("사진이 업로드 되었습니다.");
 			
 		},
 		error:function(error){

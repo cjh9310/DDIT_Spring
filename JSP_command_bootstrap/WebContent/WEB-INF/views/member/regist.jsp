@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							 	<span style="color:red;font-weight:bold;">*</span>아이디</label>	
 							<div class="col-sm-9 input-group input-group-sm">
 								<input name="id" 
-									onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
+									onkeyup="this.value=this.value.replace(/['~!@#$%^&*()_|+\-=?;:'<>\{\}\[\]\\\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
 								type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
 								<span class="input-group-append-sm">	
 									<button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append">중복확인</button>
@@ -168,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<input id="inputFile" name="pictureFile" type="file" class="form-control" 
 		   style="display:none;" onchange="picture_go();" />
 	<input id="oldFile" type="hidden" name="oldPicture" value="" />
-	<input type="hidden" name="checkUpload" value="0" />	
+	<input type="hidden" name="checkUpload" value="0" />	  <!-- checkUpload 업로드 되었는지 확인   -->
 </form>
 
 <script> // 비동기로 파일 업로드 하기      (서버는 동기 비동기 구분 못함 )
@@ -237,7 +237,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		success:function(data){
 			
 			// 업로드 확인변수 세팅
-			$('input[name="checkUpload"]'.val(1));
+			$('input[name="checkUpload"]'.val(1));  // checkUpload 가 1이어야 등록됨
 			// 저장된 파일명 저장
 			$('input#oldFile').val(data); // 변경시 삭제될 파일명
 			$('form[role="form"] input[name="picture"]').val(data);
@@ -249,6 +249,73 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			}
 		});
 	}
+	// 중복체크 했는지 안했는지
+	var checkedID = "";
+	function idCheck_go(){
+		//alert("idcheck btn click");
+		// 데이터 가져오기
+		var input_ID=$('input[name="id"]');
+		// 데이터에 아이디 유무 확인
+		if(!input_ID.val()){
+			alert("아이디를 입력하시오.");
+			input_ID.focus(); //focus 지정한 곳으로 커서 깜빡이
+			return;
+		}
+		// 
+		$.ajax({
+			url : "idCheck.do?id="+input_ID.val().trim(), // idCheck.do => url.properties에서 확인가능  .val(value)
+			method : "get",   // method나 type을 씀(둘 다 같음)    
+			success : function(result){
+				if(result.toUpperCase() == "DUPLICATED"){  //toUpperCase 대문자로 바꿔줌?
+					alert("중복된 아이디 입니다.");
+					$('input[name="id"]').focus();
+				}else {
+					alert("사용가능한 아이디 입니다.");
+					// 앞 뒤 공백을 없애준다.
+					checkedID = input_ID.val().trim();
+					$('input[name="id"]').val(input_ID.val().trim());
+				}
+			},
+			error:function(error){
+				alert("시스템장애로 가입이 불가합니다.");
+			}
+			
+		});
+	}
+	function regist_go(){
+		//alert("regist btn click");
+		var uploadCheck = $('input[name="checkUpload"]').val();   
+		if(uploadCheck=="0"){
+		  alert("사진업로드는 필수 입니다");      
+		  return;
+		}
+		if(!$('input[name="id"]').val()){
+		  alert("아이디는 필수입니다.");
+		  return;
+		}
+	    if($('input[name="id"]').val()!=checkedID){
+	      alert("아이디는 중복 확인이 필요합니다.");
+	      return;
+	    }
+	    if(!$('input[name="pwd"]').val()){
+		  alert("패스워드는 필수입니다.");
+		  return;
+	    }
+	    if(!$('input[name="name"]').val()){
+		  alert("이름은 필수입니다.");
+		  return;
+		}
+	    
+	    var form = $('form[role="form"]');
+		form.attr({"method":"post",
+		     	   "action":"regist.do"
+		   		  });	   
+		form.submit();
+		   
+		
+	}
+	
+	
 </script>
   
 <!-- jQuery -->

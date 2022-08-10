@@ -162,16 +162,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- /.content-wrapper -->	
 
-<!-- 사진  -->
+
 
 <form role="imageForm" action="upload/picture" method="post" enctype="multipart/form-data">
 	<input id="inputFile" name="pictureFile" type="file" class="form-control" 
 		   style="display:none;" onchange="picture_go();" />
 	<input id="oldFile" type="hidden" name="oldPicture" value="" />
-	<input type="hidden" name="checkUpload" value="0" />	  <!-- checkUpload 업로드 되었는지 확인   -->
+	<input type="hidden" name="checkUpload" value="0" />	
 </form>
 
-<script> // 비동기로 파일 업로드 하기      (서버는 동기 비동기 구분 못함 )
+<script>
 	function picture_go(){
 		//alert("file change");
 		var form = $('form[role="imageForm"]');
@@ -196,10 +196,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		//alert(picture.value);
 		//업로드 확인변수 초기화 (사진변경)
    		form.find('[name="checkUpload"]').val(0);	
+		document.getElementById('inputFileName').value=picture.value;
 		
-		document.getElementById('inputFileName').value=picture.value; //파일 선택 옆 공백
-		
-		if (picture.files && picture.files[0]) {  // 사진 삽입
+		if (picture.files && picture.files[0]) {
 		  var reader = new FileReader();
 		  reader.onload = function (e) {
 			  $('div#pictureView').css({
@@ -216,72 +215,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	
 	function upload_go(){
 		//alert("upload btn click");
-		if(!$('input[name="pictureFile"]').val()){ // 파일선택 전 업로드 부터 누를 시
+		if(!$('input[name="pictureFile"]').val()){
 		  alert("사진을 선택하세요.");
 		  $('input[name="pictureFile"]').click();
 		  return;
 		}  
-		if($('input[name="checkUpload"]').val()==1){
-			alert("이미업로드 된 사진입니다.");
-			return;
-		}
 		
+		if($('input[name="checkUpload"]').val()==1){
+		  alert("이미업로드 된 사진입니다.");
+		  return;      
+		}
 		
 		var formData = new FormData($('form[role="imageForm"]')[0]);
 		$.ajax({
 			url:"picture.do",
-		data:formData,
-		type:"post",
-		processData:false,
-		contentType:false,
-		success:function(data){
-			
-			// 업로드 확인변수 세팅
-			$('input[name="checkUpload"]'.val(1));  // checkUpload 가 1이어야 등록됨
-			// 저장된 파일명 저장
-			$('input#oldFile').val(data); // 변경시 삭제될 파일명
-			$('form[role="form"] input[name="picture"]').val(data);
-			alert("사진이 업로드 되었습니다.");
-			
-		},
-		error:function(error){
-			alert("현재 사진 업로드가 불가합니다. \n 관리자에게 연락바랍니다.");
-			}
+			data:formData,
+			type:"post",
+			processData:false,
+		    contentType:false,
+		    success:function(data){
+		      //업로드 확인변수 세팅
+	          $('input[name="checkUpload"]').val(1);
+	          //저장된 파일명 저장.
+	          $('input#oldFile').val(data); // 변경시 삭제될 파일명	          
+	          $('form[role="form"]  input[name="picture"]').val(data);	    	  
+	    	  alert("사진이 업로드 되었습니다.");
+		    },
+		    error:function(error){
+		      alert("현재 사진 업로드가 불가합니다.\n 관리자에게 연락바랍니다.");
+		    }
 		});
 	}
-	// 중복체크 했는지 안했는지
-	var checkedID = "";
+	
+	
+	var checkedID ="";
 	function idCheck_go(){
 		//alert("idcheck btn click");
-		// 데이터 가져오기
 		var input_ID=$('input[name="id"]');
-		// 데이터에 아이디 유무 확인
 		if(!input_ID.val()){
-			alert("아이디를 입력하시오.");
-			input_ID.focus(); //focus 지정한 곳으로 커서 깜빡이
-			return;
+	       alert("아이디를 입력하시오");
+	       input_ID.focus();
+	       return;
 		}
-		// 
 		$.ajax({
-			url : "idCheck.do?id="+input_ID.val().trim(), // idCheck.do => url.properties에서 확인가능  .val(value)
-			method : "get",   // method나 type을 씀(둘 다 같음)    
+			url : "idCheck.do?id="+input_ID.val().trim(),
+			method : "get",	
 			success : function(result){
-				if(result.toUpperCase() == "DUPLICATED"){  //toUpperCase 대문자로 바꿔줌?
-					alert("중복된 아이디 입니다.");
-					$('input[name="id"]').focus();
-				}else {
-					alert("사용가능한 아이디 입니다.");
-					// 앞 뒤 공백을 없애준다.
-					checkedID = input_ID.val().trim();
-					$('input[name="id"]').val(input_ID.val().trim());
-				}
+				if(result.toUpperCase() == "DUPLICATED"){
+			      alert("중복된 아이디 입니다.");
+			      $('input[name="id"]').focus();
+				}else{
+	              alert("사용가능한 아이디 입니다.");
+	              checkedID=input_ID.val().trim();
+	              $('input[name="id"]').val(input_ID.val().trim());	             
+	           } 
 			},
 			error:function(error){
-				alert("시스템장애로 가입이 불가합니다.");
-			}
-			
+		       alert("시스템장애로 가입이 불가합니다.");
+		    }
 		});
+		
 	}
+	
 	function regist_go(){
 		//alert("regist btn click");
 		var uploadCheck = $('input[name="checkUpload"]').val();   
@@ -314,8 +309,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		   
 		
 	}
-	
-	
 </script>
   
 <!-- jQuery -->

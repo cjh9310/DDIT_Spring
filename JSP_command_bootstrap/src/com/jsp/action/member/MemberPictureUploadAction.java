@@ -12,7 +12,7 @@ import org.apache.commons.fileupload.FileItem;
 
 import com.jsp.action.Action;
 import com.jsp.controller.FileUploadResolver;
-import com.jsp.controller.GetUploadpath;
+import com.jsp.controller.GetUploadPath;
 import com.jsp.controller.MultipartHttpServletRequestParser;
 import com.jsp.exception.NotMultipartFormDataException;
 
@@ -39,7 +39,7 @@ public class MemberPictureUploadAction implements Action {
 															   MAX_REQUEST_SIZE);
 		
 		// 2. 저장할 경로 (properties에서 관리 함)
-		String uploadPath = GetUploadpath.getUploadpath("member.picture.upload");
+		String uploadPath = GetUploadPath.getUploadPath("member.picture.upload");
 		
 		// 3. 업로드된 이미지 저장
 		FileItem[] items = multi.getFileItems("pictureFile");

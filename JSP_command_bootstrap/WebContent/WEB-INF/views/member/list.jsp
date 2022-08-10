@@ -222,6 +222,17 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 	win.focus() ; 
 }
 
+// 팝업창 닫기
+function CloseWindow(){
+	
+	window.opener.location.reload(true);
+	window.close();
+}
+
+
+
+
+
 </script>
 
 <!-- jQuery -->
@@ -231,7 +242,7 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 <!-- common.js -->
-<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap/js/common.js"></script>
 </body>
 </html>
     

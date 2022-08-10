@@ -58,8 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	            	<div class="row"  style="height:200px;">
 						<div class="mailbox-attachments clearfix col-md-12" style="text-align: center;">							
 							<div id="pictureView" class="manPicture" data-id="${member.id }" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto;"></div>														
-						</div>                <!--사진업로드 클래스 --> 
-											  <!--  id로 getpicture 할 것 -->
+						</div>
 					</div>
 					<br />
 	                <div class="form-group row" >
@@ -121,15 +120,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.content-wrapper -->
 </div>
 
+
+
 <script>
-window.onload=function(){  
+window.onload=function(){
 	MemberPictureThumb('<%=request.getContextPath()%>');
 }
 </script>
-	
 
-
-  
 <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js" ></script>
 <!-- Bootstrap 4 -->

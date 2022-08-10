@@ -9,6 +9,16 @@ public class MakeFileName {
 	
 	public static String toUUIDFileName(String fileName, String delimiter) {
 		String uuid = UUID.randomUUID().toString().replace("-", "");
+		// 파일이름을 고유학 만듥 위해 유효값으로 만들려고
 		return uuid + delimiter + fileName;                                                                                                       
 	}
+	
+	public static String parseFileNameFromUUID(String fileName, String delimiter) {
+		String[] uuidFileName = fileName.split(delimiter); 
+		// delimiter가 달러 두개인데  기존에 만든
+		return uuidFileName[uuidFileName.length - 1]; // 
+	}
+	
+	
+	
 }

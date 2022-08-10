@@ -105,8 +105,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		               	</tr>
 		     			<c:if test="${!empty memberList }" >
 		            		<c:forEach items="${memberList }" var="member">		     						     				
-		     					 <tr>
-		            		  	   	<td></td>
+		     					 <tr  onclick="OpenWindow('detail.do?id=${member.id}','회원상세',700,800);" style="cursor:pointer;">
+		            		  	   	<!-- 글자를 누르면 클릭가능하며 윈도우창이 열림  OpenWindw에 대한 url이 필요함-->
+									<!-- 사진 업로드를 위해  manPicture 클래스를 사용  왜 id를 쓰는가? 모든 페이지에서 id값은 모두 들어있지만 파일-->
+		            		  	   	<td style="margin:0;padding:0;padding-top:5px;">
+		            		  	   		<span class="manPicture" data-id="${member.id }"
+		            		  	   		      style="display:block;width:40px;height:40px;margin:0 auto;"></span></td>
+		            		  	   		      
 		            		  	   	<td>${member.id }</td>
 				              		<td>${member.pwd }</td>
 				              		<td>${member.name }
@@ -174,6 +179,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<input type='hidden' name="searchType" value="" />
 	<input type='hidden' name="keyword" value="" />
 </form>
+ 
+ 
+  
+<script>
+window.onload=function(){
+	MemberPictureThumb('<%=request.getContextPath()%>');
+}
+</script> 
+ 
    
 <script>
 
@@ -216,6 +230,8 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
+<!-- common.js -->
+<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
 </body>
 </html>
     

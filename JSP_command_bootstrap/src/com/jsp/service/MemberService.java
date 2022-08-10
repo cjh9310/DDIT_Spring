@@ -12,7 +12,7 @@ public interface MemberService {
 	Map<String,Object> getMemberList(Criteria cri)throws SQLException;
 	
 	//회원상세조회
-	MemberVO getMember(String id)throws SQLException;	
+	public MemberVO getMember(String id)throws SQLException;
 
 	//회원등록
 	public void regist(MemberVO member) throws Exception;

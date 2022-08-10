@@ -13,7 +13,7 @@ public class MemberIdCheckAction implements Action {
 
 	private MemberService memberService;
 	public void setSearchMemberService(MemberService memberService) {
-		this.memberService = memberService;
+	this.memberService = memberService;
 	}
 	
 	@Override

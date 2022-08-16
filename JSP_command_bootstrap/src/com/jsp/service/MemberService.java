@@ -5,8 +5,14 @@ import java.util.Map;
 
 import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
+import com.jsp.exception.InvalidPasswordException;
+import com.jsp.exception.NotFoundIdException;
 
 public interface MemberService {
+	
+	//login
+	void login(String id, String pwd)throws NotFoundIdException, InvalidPasswordException,
+											SQLException;
 	
 	//회원목록조회
 	Map<String,Object> getMemberList(Criteria cri)throws SQLException;

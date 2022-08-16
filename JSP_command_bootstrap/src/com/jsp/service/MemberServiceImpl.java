@@ -9,6 +9,8 @@ import com.jsp.command.Criteria;
 import com.jsp.command.PageMaker;
 import com.jsp.dao.MemberDAO;
 import com.jsp.dto.MemberVO;
+import com.jsp.exception.InvalidPasswordException;
+import com.jsp.exception.NotFoundIdException;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -58,4 +60,15 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteMember(id);		
 	}
 
+	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException{
+		
+		MemberVO member = memberDAO.selectMemberById(id);
+		if(member == null)
+			throw new NotFoundIdException();
+		if (!pwd.contentEquals(member.getPwd()))
+			throw new InvalidPasswordException();
+	}
+	
+	
+	
 }

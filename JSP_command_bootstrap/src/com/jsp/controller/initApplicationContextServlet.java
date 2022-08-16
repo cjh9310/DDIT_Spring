@@ -28,7 +28,7 @@ public class InitApplicationContextServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 //   경로를 가져오기 -----------------------------------------------------------------------------
 		String beanConfigXml = config.getInitParameter("contextConfigLocation");
-		//System.out.println(beanConfigXml);++++++++++++++++++++++++++++++++++++++++++++++
+		//System.out.println(beanConfigXml);
 		
 		if (beanConfigXml == null) return;
 		

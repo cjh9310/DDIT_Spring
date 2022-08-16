@@ -11,7 +11,7 @@ import com.jsp.action.Action;
 import com.jsp.context.ApplicationContext;
 
 
-public class HandlerMapper {
+public class HandlerMapper { // HandlerMapper에 properties 경로를 줌
 	private Map<String, Action> commandMap = new HashMap<String,Action>();
 	
 	static final String path = "com/jsp/properties/url"; // res에 배포폴더가 없으니깐 이렇게만 적어둬도 찾아간다. / 누가 읽는가?가 중요함

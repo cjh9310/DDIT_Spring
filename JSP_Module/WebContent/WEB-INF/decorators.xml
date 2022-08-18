@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 넣을 것들 -->
+<decorators defaultdir="/WEB-INF/views/decorators">
+	<decorator name="main" page="decorator.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+<!-- 뺄 것들 -->
+	<excludes>		
+		<pattern>/resources/*</pattern>					
+	</excludes>	
+</decorators>

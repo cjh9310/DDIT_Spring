@@ -1,6 +1,7 @@
 package com.jsp.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -63,7 +64,15 @@ public class LoginUserCheckFilter implements Filter {
 		
 		// login 확인
 		if(loginUser==null) { //비로그인 상태 
-			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do");
+			String contextPath = httpReq.getContextPath();
+			String retUrl = httpReq.getRequestURI().replace(contextPath,"");
+			
+			String queryString = httpReq.getQueryString();
+			if(queryString != null) {
+				retUrl += "?" + URLEncoder.encode(queryString,"utf-8");
+			}
+			
+			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do?eeror=-1&retUrl="+retUrl);
 			JSPViewResolver.view(httpReq, httpResp);
 		}else { // 로그인 아이디가 있으면 
 			chain.doFilter(request, response);

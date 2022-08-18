@@ -58,12 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<!-- /.col -->
 				</div>
 			</form>
-
-			
-
 			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
-			
-
 		</div>
 		<!-- /.login-box-body -->
 	  </div>	

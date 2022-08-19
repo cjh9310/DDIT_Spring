@@ -35,7 +35,7 @@ public class ExLoginAction implements Action {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", memberService.getMember(id));
-			session.setMaxInactiveInterval(100); //일정 대기시간이 되면 로그아웃됨(지금은 로그아웃 기능이 없어서 접근금지만)
+			session.setMaxInactiveInterval(6*60); //일정 대기시간이 되면 로그아웃됨(지금은 로그아웃 기능이 없어서 접근금지만)
 		
 		} catch (NotFoundIdException | InvalidPasswordException e) { //아이디가 틀렸는지 비번이 틀렸는지 판단은 memberServiceimpl
 			//e.printStackTrace();

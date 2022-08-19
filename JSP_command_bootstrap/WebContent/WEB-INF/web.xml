@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:com/jsp/context/application-context.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.jsp.listener.ApplicationContextInitListener</listener-class>
+  </listener>
   <filter>
-  		<filter-name>loginUserCheckFilter</filter-name>
-  		<filter-class>com.jsp.filter.LoginUserCheckFilter</filter-class>
-  		<init-param>
-  			<param-name>exclude</param-name> <!-- 필터를 안거치고 제외시키겠다. -->
-  			<param-value>login,logout</param-value> <!-- login, logout이 해당됨 -->
-  		</init-param>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
   </filter>
   <filter-mapping>
-  		<filter-name>loginUserCheckFilter</filter-name>
-  		<url-pattern>*.do</url-pattern>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  
-  <servlet>
-    <servlet-name>initServlet</servlet-name>
-    <servlet-class>com.jsp.controller.InitApplicationContextServlet</servlet-class>
+  <filter>
+    <filter-name>loginUserCheckFilter</filter-name>
+    <filter-class>com.jsp.filter.LoginUserCheckFilter</filter-class>
     <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:com/jsp/context/application-context.xml</param-value>
+      <param-name>exclude</param-name>
+      <param-value>login,logout</param-value>
     </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginUserCheckFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>com.jsp.controller.DispatcherServlet</servlet-class>

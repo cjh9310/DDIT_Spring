@@ -11,26 +11,28 @@ import com.jsp.service.MemberService;
 public class MemberModifyFormAction implements Action {
 
 	private MemberService memberService;
-	public void setMemberService(MemberService memberService) {
+	public void setSearchMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url ="/member/modify";
+		String url = "/member/modify";
 		
 		try {
 			String id = request.getParameter("id");
 			MemberVO member = memberService.getMember(id);
 			
-			String orginalFileName = MakeFileName.parseFileNameFromUUID(member.getPicture(), "\\$\\$");
-			member.setPicture(orginalFileName);
-		
+			String originalFileName = MakeFileName.parseFileNameFromUUID(member.getPicture(),"\\$\\$");
+			
+			member.setPicture(originalFileName);
+			
 			request.setAttribute("member", member);
-		}catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		
 		return url;
 	}
 

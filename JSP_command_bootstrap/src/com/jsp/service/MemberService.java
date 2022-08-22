@@ -11,14 +11,14 @@ import com.jsp.exception.NotFoundIdException;
 public interface MemberService {
 	
 	//login
-	void login(String id, String pwd)throws NotFoundIdException, InvalidPasswordException,
+	void login(String id, String pwd)throws NotFoundIdException,InvalidPasswordException,
 											SQLException;
 	
 	//회원목록조회
 	Map<String,Object> getMemberList(Criteria cri)throws SQLException;
 	
 	//회원상세조회
-	public MemberVO getMember(String id)throws SQLException;
+	MemberVO getMember(String id)throws SQLException;	
 
 	//회원등록
 	public void regist(MemberVO member) throws Exception;

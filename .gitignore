@@ -10,3 +10,16 @@
 **/JSP_command_bootstrap/**/resources/**
 **/JSP_bootstrap/**/resources/**
 *.class
+JSP_Module/
+JAVA_basic/
+JAVA_reflection/
+JSP_Module/
+JSP_Filter/
+JSP_JSTL/
+JSP_Listener/
+JSP_Module/
+JSP_basic/
+JSP_bootstrap/
+servlet_basic/
+JSP_EL/
+DDIT_semi_hospital/WebContent/resources/

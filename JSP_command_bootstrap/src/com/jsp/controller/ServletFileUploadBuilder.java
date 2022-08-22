@@ -26,7 +26,5 @@ public class ServletFileUploadBuilder {
 		upload.setSizeMax(MAX_REQUEST_SIZE);
 
 		return upload;
-
 	}
-
 }

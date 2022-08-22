@@ -10,20 +10,20 @@ import java.util.Set;
 import com.jsp.action.Action;
 import com.jsp.context.ApplicationContext;
 
-
-public class HandlerMapper { // HandlerMapper에 properties 경로를 줌
-	private Map<String, Action> commandMap = new HashMap<String,Action>();
+public class HandlerMapper {
 	
-	static final String path = "com/jsp/properties/url"; // res에 배포폴더가 없으니깐 이렇게만 적어둬도 찾아간다. / 누가 읽는가?가 중요함
+	private Map<String, Action> commandMap= new HashMap<String, Action>();
 	
-	public HandlerMapper() throws Exception{
+	static final String path = "com/jsp/properties/url";
+	
+	public HandlerMapper() throws Exception {
 		this(path);
 	}
-	public HandlerMapper(String path) throws Exception{
-		ResourceBundle rbHome = ResourceBundle.getBundle(path); // getBundle는 상대적 경로를 읽는다.
-		Set<String> actionSetHome = rbHome.keySet(); // url set
+	public HandlerMapper(String path) throws Exception {	
+		ResourceBundle rbHome = ResourceBundle.getBundle(path);
+		Set<String> actionSetHome = rbHome.keySet(); // uri set
 		Iterator<String> it = actionSetHome.iterator();
-		while(it.hasNext()) {
+		while(it.hasNext()){
 			String command = it.next(); //key -> url			
 
 			String actionClassName = rbHome.getString(command);
@@ -45,12 +45,11 @@ public class HandlerMapper { // HandlerMapper에 properties 경로를 줌
 					System.out.println("[HandlerMapper:invoke]"
 							+actionClassName+":"
 							+ApplicationContext.getApplicationContext().get(paramType));
-					
 				}
 			}
+			
 			commandMap.put(command, commandAction);
 			System.out.println("[HandlerMapper]"+command+":"+commandAction +" 가 준비되었습니다.");
-			
 			
 		}
 		
@@ -60,5 +59,12 @@ public class HandlerMapper { // HandlerMapper에 properties 경로를 줌
 		Action action = commandMap.get(url);
 		return action;
 	}
-	
 }
+
+
+
+
+
+
+
+

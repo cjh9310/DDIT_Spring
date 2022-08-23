@@ -55,7 +55,7 @@
 		    ]]>
 		)
 		 <![CDATA[
-		where rnum > #{startRow}		
+		where rnum >= #{startRow}		
 		 ]]>
 	</select>
 	

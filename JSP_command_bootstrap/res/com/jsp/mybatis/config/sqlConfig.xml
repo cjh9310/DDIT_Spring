@@ -12,6 +12,7 @@
 		
 		<typeAlias type="com.jsp.dto.MemberVO"  alias="member"/>
 		<typeAlias type="com.jsp.dto.NoticeVO"  alias="notice"/>
+		<typeAlias type="com.jsp.dto.BoardVO"  alias="board"/>
   	</typeAliases>
   	
   	
@@ -36,6 +37,7 @@
   	<mappers>
 		<mapper resource="com/jsp/mybatis/mappers/Member-Mapper.xml"/>
 		<mapper resource="com/jsp/mybatis/mappers/Notice-Mapper.xml"/>		
+		<mapper resource="com/jsp/mybatis/mappers/Board-Mapper.xml"/>		
 	</mappers>
   </configuration>
   

@@ -8,14 +8,20 @@
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 	</bean>
 	<bean id = "noticeDAO" class="com.jsp.dao.NoticeDAOImpl" />
-			
+	<bean id = "boardDAO" class="com.jsp.dao.BoardDAOImpl" />
+		
 	<!-- Service -->
 	<bean id="memberService" class="com.jsp.service.MemberServiceImpl" >
 		<property name="memberDAO" ref-value="memberDAO" /> 
 	</bean>
+	<!-- noticeDAO에서 sqlSessionFactory을 처리하지 않는 이유는? -->
 	<bean id="noticeService" class="com.jsp.service.NoticeServiceImpl" >
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="noticeDAO" ref-value="noticeDAO" />
+	</bean>
+	<bean id="boardService" class="com.jsp.service.BoardServiceImpl" >
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="boardDAO" ref-value="boardDAO" />
 	</bean>
 	
 </beans>

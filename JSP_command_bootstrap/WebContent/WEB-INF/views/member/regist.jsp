@@ -248,6 +248,7 @@
 	              checkedID=input_ID.val().trim();
 	              $('input[name="id"]').val(input_ID.val().trim());	             
 	           } 
+	           
 			},
 			error:function(error){
 		       alert("시스템장애로 가입이 불가합니다.");
@@ -289,9 +290,7 @@
 		
 	}
 </script>
-
-    
-
+ 
 
 
 

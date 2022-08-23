@@ -7,4 +7,3 @@
 	window.opener.location.href="<%=request.getContextPath()%>/member/list.do";
 	window.close();	
 </script>
-window는 회원가입form , opener는 list 

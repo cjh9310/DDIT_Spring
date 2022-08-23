@@ -15,7 +15,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<BoardVO> selectSearchBoardList(SqlSession session, Criteria cri) throws SQLException {
 		int startRow = cri.getStartRowNum();
-		int endRow = startRow+cri.getPerPageNum()-1;
+		int endRow = startRow+cri.getPerPageNum()+1;
 		
 		Map<String, Object> dataParam = new HashMap<String, Object>();
 		dataParam.put("startRow", startRow);

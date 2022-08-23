@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board-Mapper">
+
+	<sql id ="search">
+		<if test="searchType == 't'.toString()">
+			and title like '%' ||#{keyword}|| '%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			and write like '%' ||#{keyword}|| '%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%' ||#{keyword}|| '%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			title like '%' || #{keyword} || '%'
+			or
+			content like '%' || #{keyword} || '%'
+			)
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			and (
+			write like '%' || #{keyword} || '%'
+			or
+			content like '%' || #{keyword} || '%'
+			)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			and (
+			title like '%' || #{keyword} || '%'
+			or
+			write like '%' || #{keyword} || '%'
+			or
+			content like '%' || #{keyword} || '%'
+			)
+		</if>
+	
+	</sql>
+	
+	
+	<select id="selectSearchBoardList" resultType="board">		
+		select * 
+		from(
+			select rownum as rnum,SearchBoardResult.*
+			from (
+				select *
+				from board
+				where bno is not null
+				<include refid="search" />
+				order by regDate desc
+			)	SearchBoardResult
+			<![CDATA[
+			where rownum <= #{endRow}
+			]]>
+		)
+		<![CDATA[
+		where rnum > #{startRow}
+		]]>
+	</select>
+	
+	<select id = "selectSearchBoardListCount" resultType="int">
+		select
+		count(*)
+		from board
+		where bno is not null
+		<include refid="search"/>
+		order by regDate desc
+	</select>
+	
+	<select id = "selectBoardByBno" parameterType="int" resultType="board">
+		select
+		*
+		from board
+		where bno=#{bno}
+	</select>
+	
+	<select id = "selectBoardSequenceNextValue" resultType="int">
+		select board_seq.nextVal
+		from dual
+	</select>
+	
+	<update id = "increaseViewCount" parameterType="int">
+		update board
+		set viewcnt=viewcnt+1
+		where bno =#{bno}
+	</update>
+	
+	<update id ="insertBoard" parameterType="board">
+		insert into
+		board(bno,title,write,content)
+		value(#{bno},#{title},#{write},#{content})
+	</update>
+	
+	<update id ="updateBoard" parameterType="board">
+		update board
+		set
+		title=#{title},content=#{content}
+		where bno=#{bno}
+	</update>
+	
+	<update id ="deleteBoard" parameterType="board">
+		delete
+		from board
+		where bno=#{bno}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+

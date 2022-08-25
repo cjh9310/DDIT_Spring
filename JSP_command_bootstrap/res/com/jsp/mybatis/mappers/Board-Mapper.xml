@@ -38,77 +38,67 @@
 			)			
 		</if>
 	</sql>
-	
-	
-	<select id="selectSearchBoardList" resultType="board">		
-		select * 
-		from(
-			select rownum as rnum,SearchBoardResult.*
-			from (
-				select *
-				from board
-				where bno is not null
-				<include refid="search" />
-				order by regDate desc
-			)	SearchBoardResult
-			<![CDATA[
-			where rownum <= #{endRow}
-			]]>
-		)
-		<![CDATA[
-		where rnum >= #{startRow}
-		]]>
-	</select>
-	
-	<select id = "selectSearchBoardListCount" resultType="int">
+	<select id="selectSearchBoardList"	resultType="board">
 		select
-		count(*)
-		from board
-		where bno is not null
-		<include refid="search"/>
+		*
+		from
+		board
+		where bno is not null  			  	
+		<include refid="search" />
 		order by regDate desc
 	</select>
 	
-	<select id = "selectBoardByBno" parameterType="int" resultType="board">
+	<select id="selectSearchBoardListCount" resultType="int">
 		select
-		*
-		from board
+		count(*)
+		from
+		board
+		where bno is not null  			  	
+		<include refid="search" />
+		order by regdate desc
+	</select>
+	
+	
+	<select id="selectBoardByBno"  resultType="board">
+		select * 
+		from board 
 		where bno=#{bno}
 	</select>
 	
-	<select id = "selectBoardSequenceNextValue" resultType="int">
-		select board_seq.nextVal
-		from dual
-	</select>
-	
-	<update id = "increaseViewCount" parameterType="int">
-		update board
-		set viewcnt=viewcnt+1
-		where bno =#{bno}
-	</update>
-	
-	<update id ="insertBoard" parameterType="board">
-		insert into
+	<update id="insertBoard" parameterType="board">
+		insert 
+		into 
 		board(bno,title,writer,content)
-		value(#{bno},#{title},#{writer},#{content})
+		values
+		(#{bno},#{title},#{writer},#{content})
 	</update>
 	
-	<update id ="updateBoard" parameterType="board">
-		update board
-		set
-		title=#{title},content=#{content}
+	<update id="updateBoard" parameterType="board">
+		update 
+		board 
+		set 
+		title=#{title}, content=#{content}, updatedate=sysdate 
 		where bno=#{bno}
 	</update>
 	
-	<update id ="deleteBoard" parameterType="board">
-		delete
-		from board
+	<update id="deleteBoard" parameterType="int">
+		delete 
+		from board 
 		where bno=#{bno}
 	</update>
 	
+	<update id="increaseViewCnt" parameterType="int">
+		update 
+		board 
+		set 
+		viewcnt=viewcnt+1 
+		where bno=#{bno}
+	</update>
+	
+	<select id="selectBoardSeqNext" resultType="int">
+		select board_seq.nextval as bno from dual
+	</select>
 </mapper>
-
-
 
 
 

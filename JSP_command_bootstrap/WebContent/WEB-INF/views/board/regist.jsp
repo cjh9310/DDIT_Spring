@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<title>게시판 등록</title>
+<title>공지 등록</title>
 
 <body>
  <!-- Main content -->
@@ -14,13 +14,13 @@
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>게시판등록</h1>  				
+	  				<h1>공지등록</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>게시판
+				        	<i class="fa fa-dashboard"></i>공지사항
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">
@@ -38,7 +38,7 @@
 			<div class="col-md-9" style="max-width:960px;">
 				<div class="card card-outline card-info">
 					<div class="card-header">
-						<h3 class="card-title p-1">게시판목록</h3>
+						<h3 class="card-title p-1">공지등록</h3>
 						<div class ="card-tools">
 							<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
@@ -75,9 +75,58 @@
 <script>
 
 	window.onload=function(){
-		$('textarea#content').summernote();
+		$('textarea#content').summernote({
+			placeholder:'여기에 내용을 적으세요.',
+			lang:'ko-KR',
+			height:250,
+			disableResizeEditor: true,
+			callbacks:{
+				onImageUpload : function(files, editor, welEditable) {
+					for(var file of files){
+						//alert(file.name);
+						
+						if(file.name.substring(file.name.lastIndexOf(".")+1).toUpperCase() != "JPG"){
+							alert("JPG 이미지형식만 가능합니다.");
+							return;
+						}
+						if(file.size > 1024*1024*5){
+							alert("이미지는 5MB 미만입니다.");
+							return;
+						}	
+						
+					}
+					
+					for (var file of files) {
+						sendFile(file,this);
+					}
+				},
+				onMediaDelete : function(target) {
+					alert(target[0].src);
+					
+				}
+			}
+		});
 	}
 	
+	
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append("file", file); 
+		$.ajax({
+			url: '<%=request.getContextPath()%>/uploadImg.do',
+	    	data: form_data,
+	    	type: "POST",	    	
+	    	contentType: false,	    	
+	    	processData: false,
+	    	success: function(img_url) {
+	    		//alert(img_url);
+	    		$(el).summernote('editor.insertImage', img_url);
+	    	},
+	    	error:function(){
+	    		alert(file.name+" 업로드에 실패했습니다.");
+	    	}
+		});
+	}
 </script>
 
 <script>

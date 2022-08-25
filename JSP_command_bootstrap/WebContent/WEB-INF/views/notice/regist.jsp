@@ -73,11 +73,9 @@
     </section>
 
 <script>
-
 	window.onload=function(){
-		$('textarea#content').summernote();
+		summernote_go($('textarea[name="content"]'), '<%=request.getContextPath()%>');
 	}
-	
 </script>
 
 <script>

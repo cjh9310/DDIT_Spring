@@ -37,7 +37,7 @@
   	<mappers>
 		<mapper resource="com/jsp/mybatis/mappers/Member-Mapper.xml"/>
 		<mapper resource="com/jsp/mybatis/mappers/Notice-Mapper.xml"/>		
-		<mapper resource="com/jsp/mybatis/mappers/Board-Mapper.xml"/>		
+		<mapper resource="com/jsp/mybatis/mappers/Board-Mapper.xml"/>
 	</mappers>
   </configuration>
   

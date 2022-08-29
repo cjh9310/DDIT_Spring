@@ -15,8 +15,7 @@ public class PageMaker {
 
 	// starPage,endPage, prev, next 설정. by totalCount
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage()/(double) displayPageNum) * displayPageNum);  // ex) 1~10 사이중 끝 페이지
-		// ceil 올림                            cri.getPage() : 현재 페이지 번호,   displayPageNum : 페이지 번호의 수
+		endPage = (int) (Math.ceil(cri.getPage()/(double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
 		realEndPage = (int) (Math.ceil(totalCount/(double) cri.getPerPageNum()));

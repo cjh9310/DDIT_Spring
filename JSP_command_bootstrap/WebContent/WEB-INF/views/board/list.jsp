@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<c:set var="boardList" value="${dataMap.boardList }" />
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
-<c:set var="cri" value="${pageMaker.cri }" />
+<c:set var="cri" value="${dataMap.pageMaker.cri }" />
+<c:set var="boardList" value="${dataMap.boardList }" />
 
+<head></head>
+
+<title></title>
+
+<body>
 
 
 <head></head>
 
-<title>공지목록</title>
+<title>자유게시판목록</title>
 
 <body>
 	 <!-- Main content -->
@@ -20,13 +25,13 @@
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>공지목록</h1>  				
+	  				<h1>자유게시판</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
+				        	<i class="fa fa-dashboard"></i>자유게시판
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">
@@ -42,8 +47,8 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">공지등록</button>				
-				<div id="keyword" class="card-tools" style="width:540px;">
+				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700);">게시글등록</button>				
+				<div id="keyword" class="card-tools" style="width:450px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
 					  		onchange="list_go();">
@@ -87,32 +92,41 @@
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
-					</c:if>				
+					</c:if>						
 					<c:forEach items="${boardList }" var="board">
-						<tr style='font-size:0.85em;cursor:pointer;' onclick="OpenWindow('detail.do?from=list&nno=${board.bno }','상세보기',800,700);">
+						<tr style='font-size:0.85em;'>
 							<td>${board.bno }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 												white-space: nowrap; text-overflow: ellipsis;">
-							${board.title }
-							</td>			
-							<td data-target="board-writer">${board.writer}<td>							
+												
+							<a href="javascript:OpenWindow('detail.do?from=list&bno=${board.bno }','상세보기',800,700);">
+								<span class="col-sm-12 ">${board.title }
+									<c:if test="${board.replycnt ne 0 }">		
+										<span class="nav-item">															
+										&nbsp;&nbsp;<i class="fa fa-comment"></i>
+										<span class="badge badge-warning navbar-badge">${board.replycnt}</span>
+										</span>
+										
+									</c:if>
+							</span>								
+							</a>
+							</td>
+							<td>${board.writer }</td>
+							<td>
 								<fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/>
 							</td>
-							<td><span class="badge bg-red">${board.viewcnt }</span></td>		
+							<td><span class="badge bg-red">${board.viewcnt }</span></td>
 						</tr>
 					</c:forEach>
 				</table>				
 			</div>
 			<div class="card-footer">
-				<%@ include file="/WEB-INF/views/include/pagination.jsp" %>
+				<%@ include file="/WEB-INF/views/include/pagination.jsp" %>				
 			</div>
-		
 		</div>
 		
-    </section> 
+    </section>
+    <!-- /.content -->
 
 
-
-
-
-
+</body>

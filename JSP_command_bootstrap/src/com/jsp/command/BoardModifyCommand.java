@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.jsp.dto.BoardVO;
 
-public class BoardRegistCommand {
+public class BoardModifyCommand {
 	
 	private String bno;          // 게시판번호
 	private String title;

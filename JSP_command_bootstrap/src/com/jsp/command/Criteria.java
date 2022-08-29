@@ -8,6 +8,7 @@ public class Criteria {
 	private String keyword;
 	
 	
+	
 	public String getSearchType() {
 		return searchType;
 	}

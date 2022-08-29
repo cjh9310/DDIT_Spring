@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <head>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
@@ -61,7 +61,7 @@
 							<div class="form-group">
 								<label for="content">내 용</label>
 								<textarea class="textarea" name="content" id="content" rows="20"
-									cols="90" placeholder="1000자 내외로 작성하세요." >${notice.content}</textarea>
+									cols="90" placeholder="1000자 내외로 작성하세요." >${fn:escapeXml(notice.content)}</textarea>
 							</div>
 						</form>
 					</div><!--end card-body  -->
@@ -73,9 +73,24 @@
 		</div><!-- end row -->
     </section>
     <!-- /.content -->
-   	<script>
-   		function modifyPOST_go(){
-   			$("form[role='modifyForm']").submit();
-   		}
-   	</script>
+    
+    <script>
+		window.onload=function(){
+			summernote_go($('textarea[name="content"]'),'<%=request.getContextPath()%>');	
+		}	
+	</script>
+    <script>
+	    function modifyPOST_go(){
+			 $("form[role='modifyForm']").submit();
+		 }    
+    </script>    
+    
 </body>
+
+
+
+
+
+
+
+

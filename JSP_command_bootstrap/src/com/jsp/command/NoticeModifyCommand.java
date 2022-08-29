@@ -34,16 +34,17 @@ public class NoticeModifyCommand {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	// 여기서 다시 integer로 바꿔주는 중요한 역할을 해주는 곳
-	public NoticeVO toNoticeVO() {
+	
+	public NoticeVO toNoticeVO(){
 		NoticeVO notice = new NoticeVO();
 		
 		notice.setNno(Integer.parseInt(this.nno));
-		notice.setTitle((this.title));
-		notice.setContent((this.content));
-		notice.setWriter((this.writer));
+		notice.setTitle(this.title);
+		notice.setContent(this.content);
+		notice.setWriter(this.writer);	
 		
 		return notice;
+		
 	}
 	
 }

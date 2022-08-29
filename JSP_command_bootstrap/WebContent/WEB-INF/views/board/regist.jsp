@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    
+<%@ page trimDirectiveWhitespaces="true" %>
+   
 <head>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<title>공지 등록</title>
+<title>게시글 등록</title>
 
 <body>
- <!-- Main content -->
+	 <!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>공지등록</h1>  				
+	  				<h1>글등록</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
+				        	<i class="fa fa-dashboard"></i>자유게시판
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">
@@ -38,7 +38,7 @@
 			<div class="col-md-9" style="max-width:960px;">
 				<div class="card card-outline card-info">
 					<div class="card-header">
-						<h3 class="card-title p-1">공지등록</h3>
+						<h3 class="card-title p-1">글등록</h3>
 						<div class ="card-tools">
 							<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@
 							<div class="form-group">
 								<label for="content">내 용</label>
 								<textarea class="textarea" name="content" id="content" rows="20"
-									cols="90" placeholder="1000자 내외로 작성하세요." ></textarea>
+									placeholder="1000자 내외로 작성하세요." style="display: none;"></textarea>
 							</div>
 						</form>
 					</div><!--end card-body  -->
@@ -71,67 +71,14 @@
 			</div><!-- end col-md-12 -->
 		</div><!-- end row -->
     </section>
-
+    <!-- /.content -->
+    
+    
 <script>
-
-	window.onload=function(){
-		$('textarea#content').summernote({
-			placeholder:'여기에 내용을 적으세요.',
-			lang:'ko-KR',
-			height:250,
-			disableResizeEditor: true,
-			callbacks:{
-				onImageUpload : function(files, editor, welEditable) {
-					for(var file of files){
-						//alert(file.name);
-						
-						if(file.name.substring(file.name.lastIndexOf(".")+1).toUpperCase() != "JPG"){
-							alert("JPG 이미지형식만 가능합니다.");
-							return;
-						}
-						if(file.size > 1024*1024*5){
-							alert("이미지는 5MB 미만입니다.");
-							return;
-						}	
-						
-					}
-					
-					for (var file of files) {
-						sendFile(file,this);
-					}
-				},
-				onMediaDelete : function(target) {
-					alert(target[0].src);
-					
-				}
-			}
-		});
-	}
-	
-	
-	function sendFile(file, el) {
-		var form_data = new FormData();
-		form_data.append("file", file); 
-		$.ajax({
-			url: '<%=request.getContextPath()%>/uploadImg.do',
-	    	data: form_data,
-	    	type: "POST",	    	
-	    	contentType: false,	    	
-	    	processData: false,
-	    	success: function(img_url) {
-	    		//alert(img_url);
-	    		$(el).summernote('editor.insertImage', img_url);
-	    	},
-	    	error:function(){
-	    		alert(file.name+" 업로드에 실패했습니다.");
-	    	}
-		});
-	}
-</script>
-
-<script>
+window.onload=function(){
+	summernote_go($('#content'),'<%=request.getContextPath()%>'); 
+}
 function regist_go(){
-
 	var form = document.registForm;
 	if(form.title.value==""){
 		alert("제목은 필수입니다.");
@@ -140,16 +87,6 @@ function regist_go(){
 	
 	form.submit();
 }
-</script>    
-    
-    
+</script>
+
 </body>
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,9 @@
 package com.jsp.command;
 
 public class SummernoteDeleteImgCommand {
-	
+
 	private String fileName;
-	
+
 	public String getFileName() {
 		return fileName;
 	}
@@ -16,6 +16,6 @@ public class SummernoteDeleteImgCommand {
 	public String toString() {
 		return "SummernoteDeleteImgCommand [fileName=" + fileName + "]";
 	}
-
+	
 	
 }

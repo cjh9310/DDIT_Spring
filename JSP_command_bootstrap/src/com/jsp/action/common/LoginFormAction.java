@@ -11,6 +11,11 @@ public class LoginFormAction implements Action {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url="/common/loginForm";
 		
+		String error=request.getParameter("error");
+		if(error!=null && error.contentEquals("-1")) {
+			response.setStatus(302);
+		}
+		
 		String retUrl = request.getParameter("retUrl");
 		
 		request.setAttribute("retUrl", retUrl);

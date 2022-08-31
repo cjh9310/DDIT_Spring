@@ -23,3 +23,4 @@ JSP_bootstrap/
 servlet_basic/
 JSP_EL/
 DDIT_semi_hospital/WebContent/resources/
+**/project/**/resources/**

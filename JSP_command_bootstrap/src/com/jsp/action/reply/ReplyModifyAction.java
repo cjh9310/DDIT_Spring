@@ -24,7 +24,7 @@ public class ReplyModifyAction implements Action {
 		ObjectMapper mapper = new ObjectMapper();
 		ReplyVO reply = mapper.readValue(request.getReader(), ReplyVO.class);
 		
-		// XSS
+		// XSS 댓글의 내용에 태그 <>를 빼고 실행시킬 수 있게 도와준다.
 		reply.setReplytext(HTMLInputFilter.htmlSpecialChars(reply.getReplytext()));
 		
 		//DB

@@ -73,6 +73,7 @@ public class LoginUserCheckFilter implements Filter {
 			}
 			
 			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do?eeror=-1&retUrl="+retUrl);
+			// error= -1 이 LoginFormAction 에서 LoginUserCheckFilter의 setAttribute를 실행시켰음을 인식시켜줌
 			JSPViewResolver.view(httpReq, httpResp);
 		}else { // 로그인 아이디가 있으면 
 			chain.doFilter(request, response);

@@ -10,8 +10,13 @@
 	<bean id = "noticeDAO" class="com.jsp.dao.NoticeDAOImpl" />
 	<bean id = "boardDAO" class="com.jsp.dao.BoardDAOImpl" />
 	<bean id = "replyDAO" class="com.jsp.dao.ReplyDAOImpl" />
+	<bean id = "menuDAO" class="com.jsp.dao.MenuDAOImpl" />	
 			
 	<!-- Service -->
+	<bean id="menuService" class="com.jsp.service.MenuServiceImpl">		
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="menuDAO" ref-value="menuDAO" />
+	</bean>
 	<bean id="memberService" class="com.jsp.service.MemberServiceImpl" >
 		<property name="memberDAO" ref-value="memberDAO" /> 
 	</bean>

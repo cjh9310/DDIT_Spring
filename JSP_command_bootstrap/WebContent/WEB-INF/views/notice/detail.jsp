@@ -73,17 +73,20 @@
     </section>
     <!-- /.content -->
     
-<script>
-	function modify_go(nno){
-		location.href="modifyForm.do?nno="+nno;
-	}
-	function remove_go(nno){
-		location.href="remove.do?nno="+nno;
-	}
-	function CloseWindow(){
-	
-		
-}
-
+<script>    
+     function modify_go(nno){
+		 location.href="modifyForm.do?nno="+nno;
+	 }
+	 
+	 function remove_go(nno){
+		 location.href="remove.do?nno="+nno;
+	 }
 </script>
+
 </body>
+
+
+
+
+
+

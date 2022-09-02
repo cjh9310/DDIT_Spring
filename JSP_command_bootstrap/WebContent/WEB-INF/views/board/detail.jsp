@@ -93,8 +93,7 @@
 						<div class="timeline">
 							<!-- timeline time label -->
 							<div class="time-label" id="repliesDiv">
-								<span class="bg-green">Replies List </span>		
-							<!-- reply_js에서 정보를 가져옴 -->					
+								<span class="bg-green">Replies List </span>							
 							</div>
 							
 							

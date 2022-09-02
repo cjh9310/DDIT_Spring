@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-
 	<div class="hold-transition login-page">
 	   <div class="login-box">
 		<div class="login-logo">
@@ -39,7 +38,12 @@
 					<!-- /.col -->
 				</div>
 			</form>
+
+			
+
 			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
+			
+
 		</div>
 		<!-- /.login-box-body -->
 	  </div>	
@@ -47,11 +51,5 @@
 	<!-- /.login-box -->
 	
   </div>    
-
-
-
-
-
-
 
 

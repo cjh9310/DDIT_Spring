@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 
     
-<h1>${category }main page</h1>
+    
+<h1>${category } main page</h1>

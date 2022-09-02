@@ -16,8 +16,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public List<NoticeVO> selectSearchNoticeList(SqlSession session, Criteria cri) throws SQLException {
 
-		int startRow = cri.getStartRowNum();
-		int endRow = startRow+cri.getPerPageNum()+1;		
+		int startRow = cri.getStartRowNum()+1;
+		int endRow = startRow+cri.getPerPageNum()-1;		
 		
 		Map<String, Object> dataParam = new HashMap<String, Object>();
 		dataParam.put("startRow", startRow);

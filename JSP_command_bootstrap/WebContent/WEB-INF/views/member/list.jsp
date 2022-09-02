@@ -112,7 +112,7 @@
     	       </div> <!-- row -->
     		</div> <!-- card-body -->
     		<div class="card-footer">
-    		
+    			<%@ include file="/WEB-INF/views/include/pagination.jsp" %>
     		</div>
 	     </div>
    	</section>

@@ -90,7 +90,12 @@
 								</a>
 							</td>
 							<td>
-								
+								<c:if test="${!empty pds.attachList }">
+									<i class="nav-icon fas fa-file"></i>(${pds.attachList.size() })
+								</c:if>
+								<c:if test="${empty pds.attachList }">
+									<span>-</span>
+								</c:if>
 							</td>
 							<td>${pds.writer }</td>
 							<td>

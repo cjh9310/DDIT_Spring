@@ -72,7 +72,9 @@ public class PdsServiceImpl implements PdsService{
 				for(AttachVO attach:pds.getAttachList()) {
 					String originalFileName 
 						= MakeFileName.parseFileNameFromUUID(attach.getFileName(), "\\$\\$");
-					attach.setFileName(originalFileName);					
+					attach.setFileName(originalFileName);		
+					// 파일 이름의 고유 아이디를 없애고 기존 파일 이름으로 설정.
+					// 단 삭제시에는 PdsRemoveAction에서 함
 				}
 			}
 			

@@ -12,7 +12,6 @@
 		<config>src/main/resources/kr/or/ddit/context/root-context.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

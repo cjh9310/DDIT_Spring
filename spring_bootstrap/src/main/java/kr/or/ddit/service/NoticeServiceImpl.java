@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.jsp.command.Criteria;
 import com.jsp.command.PageMaker;
 import com.jsp.dto.NoticeVO;
 import com.jsp.service.NoticeService;
 
 import kr.or.ddit.dao.NoticeDAO;
+
 
 public class NoticeServiceImpl implements NoticeService {
 
@@ -33,6 +32,8 @@ public class NoticeServiceImpl implements NoticeService {
 		// 전체 board 개수
 		int totalCount = noticeDAO.selectSearchNoticeListCount(cri);
 
+		if(true) throw new SQLException();
+		
 		// PageMaker 생성.
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

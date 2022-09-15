@@ -1,5 +1,6 @@
 package kr.or.ddit.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.josephoconnell.html.HTMLInputFilter;
 import com.jsp.command.Criteria;
-import com.jsp.controller.FileDownloadResolver;
 import com.jsp.dto.AttachVO;
 import com.jsp.dto.PdsVO;
 import com.jsp.service.PdsService;
 
+import kr.or.ddit.command.PdsModifyCommand;
 import kr.or.ddit.command.PdsRegistCommand;
 
 @Controller
@@ -130,6 +131,75 @@ public class PdsController {
 
 		return mnv;
 	}
+	
+	@RequestMapping("/modify")
+	public String modifyPOST(PdsModifyCommand modifyReq,
+							 HttpServletRequest request,
+							 RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/pds/detail.do";
+		
+		// 파일 삭제
+		if (modifyReq.getDeleteFile() != null && modifyReq.getDeleteFile().size() > 0) {
+			for (int ano : modifyReq.getDeleteFile()) {
+				AttachVO attach = service.getAttachByAno(ano);
+				
+				File deleteFile
+						= new File(attach.getUploadPath(), attach.getFileName());
+				
+				if (deleteFile.exists()) {
+					deleteFile.delete();  // File 삭제
+				}
+				service.removeAttachByAno(ano); // DB 삭제
+			}
+		}
+		
+		// file 저장 -> List<AttachVO>
+		List<AttachVO> attachList
+			= MultipartFileUploadResolver.fileUpload(modifyReq.getUploadFile(), fileUploadPath);
+		
+		// DB
+		PdsVO pds = modifyReq.toPdsVO();
+		pds.setAttachList(attachList);
+		
+		pds.setTitle(HTMLInputFilter.htmlSpecialChars(pds.getTitle()));
+		
+		service.modify(pds);
+		
+		rttr.addFlashAttribute("from","modify");
+		rttr.addAttribute("pno",pds.getPno());
+		return url;
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(int pno, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/pds/detail.do";
+		
+		// 첨부파일 삭제
+		List<AttachVO> attachList = service.getPds(pno).getAttachList();
+		if(attachList != null) {
+			for (AttachVO attach : attachList) {
+				String uuidFileName = service.getAttachByAno(attach.getAno()).getFileName();
+				
+				
+				File target = new File(attach.getUploadPath(), attach.getFileName());
+				if (target.exists()) {
+					target.delete();
+				}
+			}
+		}
+		
+		// DB삭제
+		service.remove(pno);
+		
+		rttr.addFlashAttribute("from","remove");
+		rttr.addAttribute("pno",pno);
+		return url;
+	}
+	
+	
+	
+	
+	
 }
 
 

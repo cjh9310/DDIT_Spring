@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.jsp.command.Criteria;
 import com.jsp.command.PageMaker;
+import com.jsp.controller.MakeFileName;
 import com.jsp.dto.AttachVO;
 import com.jsp.dto.PdsVO;
 import com.jsp.service.PdsService;
@@ -54,6 +55,13 @@ public class PdsServiceImpl implements PdsService {
 		PdsVO pds = pdsDAO.selectPdsByPno(pno);
 		addAttachList(pds);
 
+		if(pds!= null && pds.getAttachList()!=null) {
+			for(AttachVO attach:pds.getAttachList()) {
+				String originalFileName 
+					= MakeFileName.parseFileNameFromUUID(attach.getFileName(), "\\$\\$");
+				attach.setFileName(originalFileName);		
+			}
+		}
 		return pds;
 	}
 

@@ -19,6 +19,7 @@
 		  p:maxIdle="2"
 	      p:maxTotal="2"
 	/>
+	
 	<bean id="dataSourceSpied"
 		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSource" />
@@ -29,7 +30,7 @@
 			</bean>
 		</property>
 	</bean>
-	
+		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		  p:dataSource-ref="dataSourceSpied"
 		  p:configLocation="classpath:kr/or/ddit/mybatis/config/sqlConfig.xml"

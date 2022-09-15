@@ -11,7 +11,7 @@
 <body>
 	
 	<h1>index.jsp</h1>
-	<h1>${loginUser.name }님 환영합니다.</h1>
+	<h1>${loginUser }님 환영합니다.</h1>
 	
 	<hr/>
 	<ul>

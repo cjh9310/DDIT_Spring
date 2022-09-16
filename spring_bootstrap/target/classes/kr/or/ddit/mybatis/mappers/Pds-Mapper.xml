@@ -64,6 +64,11 @@
 		from pds 
 		where pno=#{pno}
 	</select>
+	<select id="selectPdsByImage"  resultType="pds">
+		select * 
+		from pds 
+		where content like '%'||#{keyword}||'%' 
+	</select>
 	
 	<update id="insertPds" parameterType="pds">
 		insert 

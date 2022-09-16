@@ -66,6 +66,27 @@ public class CommonController {
 		return entity;
 	}
 	
+	@RequestMapping("/security/accessDenied")
+	public void accessDenied() {}
+	
+	@RequestMapping("/common/loginTimeOut")
+	public String loginTimeOut(Model model)throws Exception {
+		
+		String url="security/sessionOut";
+		
+		model.addAttribute("message","세션이 만료되었습니다.\\n다시 로그인 하세요!");
+		return url;
+	}
+	
+	@RequestMapping("/common/loginExpired")
+	public String loginExpired(Model model)throws Exception {
+		
+		String url="security/sessionOut";
+		
+		model.addAttribute("message","다른 장치에서 로그인이 되었습니다.\\n로그아웃 합니다!");
+		return url;
+	}
+	
 	@GetMapping("/common/loginForm")
 	public String loginForm(@RequestParam(defaultValue = "") String error, 
 							@ModelAttribute("retUrl") String retUrl,
@@ -80,30 +101,30 @@ public class CommonController {
 	}
 	
 	
-	@RequestMapping(value = "/common/login", method = RequestMethod.POST)
-	public String login(String id, String pwd, HttpSession session,RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/index.do";
-		try {
-			memberService.login(id, pwd);
-			session.setAttribute("loginUser", memberService.getMember(id));
-		} catch (NotFoundIdException | InvalidPasswordException e) {
-			
-			rttr.addFlashAttribute("msg",e.getMessage());
-			url = "redirect:/common/loginForm";
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return url;
-	}
-	
-	@RequestMapping(value = "/common/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		String url = "redirect:/";
-		session.invalidate();
-		return url;
-	}
+//	@RequestMapping(value = "/common/login", method = RequestMethod.POST)
+//	public String login(String id, String pwd, HttpSession session,RedirectAttributes rttr) throws Exception {
+//		String url = "redirect:/index.do";
+//		try {
+//			memberService.login(id, pwd);
+//			session.setAttribute("loginUser", memberService.getMember(id));
+//		} catch (NotFoundIdException | InvalidPasswordException e) {
+//			
+//			rttr.addFlashAttribute("msg",e.getMessage());
+//			url = "redirect:/common/loginForm";
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			throw e;
+//		}
+//		return url;
+//	}
+//	
+//	@RequestMapping(value = "/common/logout", method = RequestMethod.GET)
+//	public String logout(HttpSession session) {
+//		String url = "redirect:/";
+//		session.invalidate();
+//		return url;
+//	}
 }
 
 

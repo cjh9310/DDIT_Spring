@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jsp.command.Criteria;
 import com.jsp.dto.BoardVO;
+import com.jsp.dto.NoticeVO;
 
 public interface BoardDAO {
 	
@@ -13,6 +14,7 @@ public interface BoardDAO {
 	int selectBoardCriteriaTotalCount( Criteria cri) throws SQLException;
 	
 	BoardVO selectBoardByBno ( int bno) throws SQLException;
+	BoardVO selectBoardByImage(String imageFile) throws SQLException;
 	
 	void insertBoard( BoardVO board) throws SQLException;
 	

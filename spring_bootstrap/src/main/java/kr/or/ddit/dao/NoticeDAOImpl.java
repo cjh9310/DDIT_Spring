@@ -66,4 +66,10 @@ public class NoticeDAOImpl implements kr.or.ddit.dao.NoticeDAO {
 		
 	}
 
+	@Override
+	public NoticeVO selectNoticeByImage(String imageFile) throws SQLException {
+		NoticeVO notice = session.selectOne("Notice-Mapper.selectNoticeByImage",imageFile);
+		return notice;
+	}
+
 }

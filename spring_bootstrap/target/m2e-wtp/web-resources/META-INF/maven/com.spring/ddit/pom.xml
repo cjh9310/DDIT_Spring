@@ -20,6 +20,8 @@
 		<java-version>1.8</java-version>
 
 		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
+		<org.springframework.security-version>3.2.3.RELEASE</org.springframework.security-version>
+		
 		<oracle.ojdbc-version>11.2.0.3</oracle.ojdbc-version>
 		<commons.dbcp2-version>2.5.0</commons.dbcp2-version>
 		<org.mybatis-version>3.5.0</org.mybatis-version>
@@ -112,7 +114,32 @@
 		    <version>${org.aspectjweaver-version}</version>
 		</dependency>
 		
-		
+		<!-- spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jdbc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 
 		<!--log4jdbc-remix -->

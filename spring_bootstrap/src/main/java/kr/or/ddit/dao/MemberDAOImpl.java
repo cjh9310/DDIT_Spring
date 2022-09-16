@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jsp.command.Criteria;
-import com.jsp.dao.MemberDAO;
+
 import com.jsp.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -66,6 +66,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public void deleteMember(String id) throws SQLException {
 		session.update("Member-Mapper.deleteMember", id);
 
+	}
+
+	@Override
+	public MemberVO selectMemberByPicture(String picture) throws SQLException {
+		MemberVO member = session.selectOne("Member-Mapper.selectMemberByPicture",picture);
+		
+		return member;
 	}
 
 }

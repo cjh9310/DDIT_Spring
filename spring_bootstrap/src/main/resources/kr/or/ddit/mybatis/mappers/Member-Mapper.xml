@@ -39,6 +39,13 @@
 		from member
 		where id=#{id}
 	</select>
+	<select id="selectMemberByPicture" parameterType="str" resultType="member">
+		select
+		*
+		from member
+		where picture=#{picture}
+	</select>
+	
 	
 	<update id="insertMember" parameterType="member">
 		insert into 
@@ -64,4 +71,17 @@
 		from member 
 		where id=#{id}		
 	</update>
+	
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+

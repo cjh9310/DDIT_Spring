@@ -37,7 +37,7 @@ public class BoardController {
 	public String list(Criteria cri, Model model)throws Exception{
 		
 		String url = "board/list";
-		
+
 		Map<String, Object> dataMap = boardService.getBoardList(cri);
 		model.addAttribute("dataMap",dataMap);
 		

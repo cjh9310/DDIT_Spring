@@ -15,6 +15,7 @@ public class MemberModifyCommand {
 	private String authority; //권한
 	private MultipartFile picture; // 사진파일	
 	private String uploadPicture; // 변경된 사진 파일명.
+	
 	public String getId() {
 		return id;
 	}

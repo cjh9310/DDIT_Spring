@@ -16,13 +16,11 @@ import kr.or.ddit.dao.ReplyDAO;
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO boardDAO;
-
 	public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
 	}
 
 	private ReplyDAO replyDAO;
-
 	public void setReplyDAO(ReplyDAO replyDAO) {
 		this.replyDAO = replyDAO;
 	}

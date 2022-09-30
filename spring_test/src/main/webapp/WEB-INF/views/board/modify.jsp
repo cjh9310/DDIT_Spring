@@ -24,7 +24,7 @@
 			        <li class="breadcrumb-item active">
 			        	수정하기
 			        </li>		        
-	    	  </ol>
+	    	  </ol> 
 	  			</div>
 	  		</div>
 	  	</div>

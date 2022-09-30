@@ -22,7 +22,7 @@
 	</div>
 </div>
 
-{{/each}}
+{{/each}} 
 </script>
 <script type="text/x-handlebars-template"  id="reply-pagination-template" >
 <li class="paginate_button page-item">

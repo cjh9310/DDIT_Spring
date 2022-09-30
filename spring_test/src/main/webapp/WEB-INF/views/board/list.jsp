@@ -18,7 +18,7 @@
 <head></head>
 
 <title>자유게시판목록</title>
-
+ 
 <body>
 	 <!-- Main content -->
 	<section class="content-header">

@@ -16,19 +16,19 @@ public class SubMenuAction implements Action {
 	public void setMenuService(MenuService menuService) {
 		this.menuService = menuService;
 	}
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/common/submenu";
+		String url = null;		
 		
 		String mCode = request.getParameter("mCode");
 		
-		List<MenuVO> subMenu = menuService.getSubMenuList(mCode);
+		List<MenuVO> subMenu =  menuService.getSubMenuList(mCode);
 		
 		JSONViewResolver.view(response, subMenu);
 		
-		
-		
 		return url;
 	}
-
+	
+	
 }

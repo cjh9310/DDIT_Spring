@@ -110,28 +110,29 @@
 
 <script>
 function modify_go(){
-	$("form[role='form']").submit();
 	
-	// 유효성 체크
-	if($("input[name='title']").val() == ""){
+	var form = $('form[name="modifyForm"]');
+	
+	//유효성 체크
+	if($("input[name='title']").val()==""){
 		alert(input.name+"은 필수입니다.");
 		$("input[name='title']").focus();
 		return;
 	}
 	
-	// 파일 첨부확인
+	//파일 첨부확인
 	var files = $('input[name="uploadFile"]');
 	for(var file of files){
 		console.log(file.name+" : "+file.value);
 		if(file.value==""){
 			alert("파일을 선택하세요.");
 			file.click();
-			return false; 
+			return false;
 		}
-	}
+	}	
 	
 	
-	
+	form.submit();
 }
 
 function removeFile_go(className){

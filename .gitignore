@@ -19,7 +19,11 @@ JSP_JSTL/
 JSP_Listener/
 JSP_Module/
 JSP_basic/
+jsp_log4job/WebContent/resources/
+log4job_self/
+log4job/.svn
 JSP_bootstrap/
+spring_test2/
 servlet_basic/
 JSP_EL/
 DDIT_semi_hospital/WebContent/resources/

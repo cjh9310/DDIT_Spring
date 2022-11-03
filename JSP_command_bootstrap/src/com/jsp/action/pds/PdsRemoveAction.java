@@ -23,29 +23,24 @@ public class PdsRemoveAction implements Action {
 		
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		
-		
-		
-		// 파일삭제
+		//파일삭제
 		// pno에 대한 attachList 확보
-		List<AttachVO> attachList = pdsService.getPds(pno).getAttachList();
+		List<AttachVO> attachList = pdsService.getPds(pno).getAttachList();	
 		if(attachList != null) {
 			for (AttachVO attach : attachList) {
 				
 				String uuidFileName = pdsService.getAttachByAno(attach.getAno()).getFileName();
 				
 				String storedFilePath = attach.getUploadPath() + File.separator
-						+ attach.getFileName();
+						+ uuidFileName;
 				
 				File file = new File(storedFilePath);
 				
-				if(file.exists()) {
+				if (file.exists()) {
 					file.delete();
 				}
 			}
 		}
-		
-		
-		
 		
 		
 		//DB 내용 삭제

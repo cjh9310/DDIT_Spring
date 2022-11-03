@@ -27,8 +27,7 @@ public class ExLoginAction implements Action {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		String retUrl = request.getParameter("retUrl");
-		
-		
+				
 		if(retUrl!=null && !retUrl.isEmpty()) url="redirect:"+URLDecoder.decode(retUrl,"utf-8");
 		
 		try {
@@ -49,8 +48,6 @@ public class ExLoginAction implements Action {
 			//Exceptin 처리
 			throw e;
 		}
-		
-		System.out.println(url);
 		
 		return url;
 	}

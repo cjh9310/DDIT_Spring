@@ -3,7 +3,7 @@
 	<bean id="sqlSessionFactory"
 		  class="com.jsp.datasource.OracleMybatisSqlSessionFactory" />
 		  
-	<!-- Repository -->   
+	<!-- Repository -->
 	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" >
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 	</bean>

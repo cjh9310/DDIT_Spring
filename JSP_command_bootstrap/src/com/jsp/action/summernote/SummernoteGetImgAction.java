@@ -11,9 +11,9 @@ public class SummernoteGetImgAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = null;
+		String url=null;
 		
-		// 파일명
+		// 파일명		
 		String fileName = request.getParameter("fileName");
 		
 		// 실제 저장 경로를 설정.

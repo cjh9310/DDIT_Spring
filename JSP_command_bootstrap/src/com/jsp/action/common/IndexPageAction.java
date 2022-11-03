@@ -24,10 +24,10 @@ public class IndexPageAction implements Action {
 		
 		String mCode = request.getParameter("mCode");
 		
-		if(mCode == null) mCode="M000000";
+		if(mCode ==null) mCode="M000000";
 		
 		try {
-			//GNB 
+			//GNB
 			List<MenuVO> menuList = menuService.getMainMenuList();			
 			request.setAttribute("menuList", menuList);
 			

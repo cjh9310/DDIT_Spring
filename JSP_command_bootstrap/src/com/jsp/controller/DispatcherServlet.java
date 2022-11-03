@@ -72,8 +72,7 @@ public class DispatcherServlet extends HttpServlet {
 				} catch (Exception e) {					
 					e.printStackTrace();
 					//Exception 처리
-					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);					
 				}
 				
 			}else {

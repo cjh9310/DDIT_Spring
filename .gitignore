@@ -31,3 +31,4 @@ DDIT_semi_hospital/WebContent/resources/
 spring_bootstrap/**/bootstrap/
 spring_bootstrap/**/views/
 spring_test/**/bootstrap/
+*.zip

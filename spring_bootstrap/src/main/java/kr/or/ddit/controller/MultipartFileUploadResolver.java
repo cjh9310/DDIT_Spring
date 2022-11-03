@@ -17,7 +17,6 @@ public class MultipartFileUploadResolver extends FileUploadResolver {
 
 		List<AttachVO> attachList = new ArrayList<AttachVO>();
 
-		//저장 -> attachVO -> list.add
 		if (multiFiles != null) {
 			for (MultipartFile multi : multiFiles) {
 				String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");

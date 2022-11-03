@@ -10,16 +10,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.jsp.dto.MemberVO;
 
+//껍데기는 Uesr인데 속은 MemberVO임
 public class User implements UserDetails {
 	
 	private MemberVO member;
 	public User(MemberVO member) {
 		this.member = member;
 	}
+	
 	public MemberVO getMemberVO() {
 		return this.member;
 	}
-
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

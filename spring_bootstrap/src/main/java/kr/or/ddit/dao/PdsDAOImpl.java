@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.jsp.command.Criteria;
 import com.jsp.dao.PdsDAO;
-import com.jsp.dto.BoardVO;
 import com.jsp.dto.PdsVO;
 
 public class PdsDAOImpl implements kr.or.ddit.dao.PdsDAO{
@@ -62,13 +61,13 @@ public class PdsDAOImpl implements kr.or.ddit.dao.PdsDAO{
 
 	@Override
 	public int getSeqNextValue() throws SQLException {
-		return pdsDAO.selectPdsSeqNext(session);
+		return pdsDAO.selectSeqNextValue(session);
 	}
 
 	@Override
 	public PdsVO selectPdsByImage(String imageFile) throws SQLException {
-		PdsVO notice = session.selectOne("Pds-Mapper.selectPdsByImage",imageFile);
-		return notice;
+		PdsVO pds = session.selectOne("Pds-Mapper.selectPdsByImage", imageFile);
+		return pds;
 	}
 
 	

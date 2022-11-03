@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.jsp.command.Criteria;
 import com.jsp.dto.BoardVO;
-import com.jsp.dto.NoticeVO;
 import com.jsp.dao.BoardDAO;
 
 public class BoardDAOImpl implements kr.or.ddit.dao.BoardDAO{
@@ -61,13 +60,9 @@ public class BoardDAOImpl implements kr.or.ddit.dao.BoardDAO{
 	}
 	@Override
 	public BoardVO selectBoardByImage(String imageFile) throws SQLException {
-		BoardVO notice = session.selectOne("Board-Mapper.selectBoardByImage",imageFile);
-		return notice;
+		BoardVO board = null;
+		board = session.selectOne("Board-Mapper.selectBoardByImage", imageFile);
+		return board;
 	}
 
-
-
-
-
-	
 }

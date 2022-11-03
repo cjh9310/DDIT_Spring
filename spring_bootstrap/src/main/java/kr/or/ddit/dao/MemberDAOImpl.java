@@ -67,15 +67,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberVO selectMemberByPicture(String picture) throws SQLException {
-		MemberVO member = session.selectOne("Member-Mapper.selectMemberByPicture",picture);		
+		MemberVO member = null;
+		member = session.selectOne("Member-Mapper.selectMemberByPicture", picture);
 		return member;
 	}
 
 }
-
-
-
-
-
-
-

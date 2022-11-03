@@ -54,14 +54,15 @@ public class PdsServiceImpl implements PdsService {
 
 		PdsVO pds = pdsDAO.selectPdsByPno(pno);
 		addAttachList(pds);
-
-		if(pds!= null && pds.getAttachList()!=null) {
+		
+		if(pds!=null && pds.getAttachList()!=null) {
 			for(AttachVO attach:pds.getAttachList()) {
 				String originalFileName 
 					= MakeFileName.parseFileNameFromUUID(attach.getFileName(), "\\$\\$");
-				attach.setFileName(originalFileName);		
+				attach.setFileName(originalFileName);					
 			}
 		}
+
 		return pds;
 	}
 
@@ -86,7 +87,6 @@ public class PdsServiceImpl implements PdsService {
 	public void modify(PdsVO pds) throws SQLException {
 
 		pdsDAO.updatePds(pds);
-		// attachDAO.deleteAllAttach(pds.getPno());
 
 		if (pds.getAttachList() != null)
 			for (AttachVO attach : pds.getAttachList()) {
@@ -100,7 +100,6 @@ public class PdsServiceImpl implements PdsService {
 
 	@Override
 	public void remove(int pno) throws SQLException {
-
 		pdsDAO.deletePds(pno);
 	}
 

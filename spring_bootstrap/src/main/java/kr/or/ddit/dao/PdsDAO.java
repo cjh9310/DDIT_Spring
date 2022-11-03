@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.jsp.command.Criteria;
-import com.jsp.dto.BoardVO;
 import com.jsp.dto.PdsVO;
 
 public interface PdsDAO {

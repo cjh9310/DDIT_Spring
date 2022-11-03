@@ -4,22 +4,17 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	
-	<!-- summernote Image Path -->
 	<bean id="imgPath" class="java.lang.String">
-		<constructor-arg value="${summernote.img}" />      
+		<constructor-arg value="${summernote.img}"/>
 	</bean>
 	
-	<!-- member.picture -->
 	<bean id="picturePath" class="java.lang.String">
-		<constructor-arg value="${member.picture.upload}" />      
+		<constructor-arg value="${member.picture.upload}"/>
 	</bean>
 	
-	<!-- file upload -->
 	<bean id="fileUploadPath" class="java.lang.String">
 		<constructor-arg value="${pds.upload}"/>
 	</bean>
-			
 
 	<!-- Repository -->	
 	<bean id = "jspMenuDAO" class="com.jsp.dao.MenuDAOImpl" />	
@@ -80,6 +75,5 @@
 	<bean id="replyService" class="kr.or.ddit.service.ReplyServiceImpl"	
 		p:replyDAO-ref="replyDAO"		
 	/>
-	     
-
+	    
 </beans>

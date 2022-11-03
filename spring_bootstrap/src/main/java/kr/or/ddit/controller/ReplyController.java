@@ -1,5 +1,6 @@
 package kr.or.ddit.controller;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +32,15 @@ import com.jsp.service.ReplyService;
 @RequestMapping("/replies")
 public class ReplyController {
 	
-	
 	@Autowired
 	private ReplyService service;
-	
-
 	
 	@RequestMapping(value = "/{bno}/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> replyList(@PathVariable("bno") int bno, 
 														 @PathVariable("page") int page)
 																throws Exception {
 		ResponseEntity<Map<String, Object>> entity = null;
+		System.out.println("page"+page);
 		Criteria cri = new Criteria();
 		cri.setPage(page);
 		Map<String, Object> dataMap = service.getReplyList(bno, cri);		
@@ -49,80 +48,72 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "", method=RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody ReplyVO reply)throws Exception{
-		
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<String> register(@RequestBody ReplyVO reply) throws Exception {
+
 		ResponseEntity<String> entity = null;
-		
+
 		reply.setReplytext(HTMLInputFilter.htmlSpecialChars(reply.getReplytext()));
 		
 		service.registReply(reply);
-		
+
 		Criteria cri = new Criteria();
-		
+
 		Map<String, Object> dataMap = service.getReplyList(reply.getBno(), cri);
 		PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
 		int realEndPage = pageMaker.getRealEndPage();
-		
+
 		entity = new ResponseEntity<String>(realEndPage + "", HttpStatus.OK);
-		
+
 		return entity;
-		
 	}
 	
-	
-	@RequestMapping(value = "/{rno}", method = {RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<String> modify(@PathVariable("rno") int rno,
-										 @RequestBody ReplyVO reply) throws Exception{
+
+	@RequestMapping(value = "/{rno}", method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<String> modify(@PathVariable("rno") int rno, 
+										 @RequestBody ReplyVO reply) throws Exception {
 		
 		ResponseEntity<String> entity = null;
-		
+
 		reply.setRno(rno);
-		
+
 		service.modifyReply(reply);
 		entity = new ResponseEntity<String>(HttpStatus.OK);
-		
+
 		return entity;
+	
 	}
 	
-	
 	@RequestMapping(value = "/{bno}/{rno}/{page}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> remove(@PathVariable("rno")  int rno,
-										 @PathVariable("bno")  int bno,
-										 @PathVariable("page")  int page) throws Exception{
+	public ResponseEntity<String> remove(@PathVariable("rno") int rno, 
+										 @PathVariable("bno") int bno,
+										 @PathVariable("page") int page) throws Exception {
 		
 		ResponseEntity<String> entity = null;
 		service.removeReply(rno);
 		Criteria cri = new Criteria();
 		Map<String, Object> dataMap = service.getReplyList(bno, cri);
 		PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
-		
+
 		int realEndPage = pageMaker.getRealEndPage();
-		if(page > realEndPage) {
+		if (page > realEndPage) {
 			page = realEndPage;
 		}
 		entity = new ResponseEntity<String>("" + page, HttpStatus.OK);
+
 		return entity;
-		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+

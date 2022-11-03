@@ -11,6 +11,7 @@
 				  p:picturePath-ref="picturePath"
 				  p:memberDAO-ref="memberDAO" 
 	/>
+	
 	<scheduler id="memberPictureRemoveScheduler"/>
 	<scheduled-tasks scheduler="memberPictureRemoveScheduler">
 		<scheduled ref="memberPictureRemoveTask" 
@@ -20,27 +21,19 @@
 	
 	<beans:bean id="summernoteImageRemoveTask"
 				class="kr.or.ddit.scheduler.RemoveSummernoteImageScheduler"
-				p:pdsDAO-ref="pdsDAO"
+				p:filePath-ref="imgPath"
 				p:noticeDAO-ref="noticeDAO"
 				p:boardDAO-ref="boardDAO"
-				p:filePath-ref="imgPath"
-				/>
+				p:pdsDAO-ref="pdsDAO"
+				
+	/>
 	
-	<scheduler id="summernoteImageScheduler" />
-	
-	<scheduled-tasks scheduler="summernoteImageScheduler">
+	<scheduler id="summernoteImageRemoveScheduler"/>
+	<scheduled-tasks scheduler="summernoteImageRemoveScheduler">
 		<scheduled ref="summernoteImageRemoveTask" 
 				   method="fileRemove"
 				   cron="*/20 * * * * *"/>
-	
 	</scheduled-tasks>
 	
 	
 </beans:beans>
-
-
-
-
-
-
-

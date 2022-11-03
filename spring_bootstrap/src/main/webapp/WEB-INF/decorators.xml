@@ -4,7 +4,7 @@
 <decorators defaultdir="/WEB-INF/views/decorators">
 	<decorator name="openWindow" page="open_decorator.jsp">
 		<pattern>/**/*</pattern>
-		<pattern>/main.do</pattern>		
+		<pattern>/main.do</pattern>
 	</decorator>
 
 	<excludes>		

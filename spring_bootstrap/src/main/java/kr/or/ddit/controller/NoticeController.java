@@ -70,6 +70,9 @@ public class NoticeController {
 		
 		NoticeVO notice = null;
 		
+		//플래쉬 어트리뷰트는 컨트롤러가 아닌 JSP로 넘어가기 떄문에 여기서 쓸 수 없다.
+		//밑에 코드는 개념만 플래쉬인것일뿐, 실제가 아님
+		
 		if(!from.equals("list")) {
 			notice = noticeService.getNoticeForModify(nno);
 		}else {
@@ -84,49 +87,44 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/modifyForm")
-	public ModelAndView modifyForm(int nno,ModelAndView mnv) throws Exception{
-		String url="notice/modify";
+	public ModelAndView modifyForm(int nno, ModelAndView mnv) throws Exception {
+		String url = "notice/modify";
 		
 		NoticeVO notice = noticeService.getNoticeForModify(nno);
 		
-		mnv.addObject("notice",notice);
+		mnv.addObject("notice", notice);
 		mnv.setViewName(url);
 		
 		return mnv;
-		
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modifyPost(NoticeVO notice,
-							 HttpServletRequest request,
-							 RedirectAttributes rttr) throws Exception{
+			                 HttpServletRequest request,
+			                 RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/notice/detail.do";
 		
 		notice.setTitle(HTMLInputFilter.htmlSpecialChars(notice.getTitle()));
 		
 		noticeService.modify(notice);
 		
-		rttr.addAttribute("nno",notice.getNno());
+		rttr.addAttribute("nno", notice.getNno());
 		rttr.addFlashAttribute("from","modify");
 		
 		return url;
 	}
 	
-	@RequestMapping(value="/remove",method=RequestMethod.GET)
-	public String remove(int nno, RedirectAttributes rttr) throws Exception{
+	@RequestMapping(value = "/remove", method = RequestMethod.GET)
+	public String remove(int nno, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/notice/detail.do";
 		
 		noticeService.remove(nno);
 		
-		rttr.addFlashAttribute("from","remove");
+		rttr.addFlashAttribute("from", "remove");
 		rttr.addAttribute("nno",nno);
 		
 		return url;
+		
 	}
+	
 }
-
-
-
-
-
-

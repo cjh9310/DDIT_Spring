@@ -1,17 +1,19 @@
-//사용자 사진 출력
-function MemberPictureThumb(contextPath){
-	 for(var target of document.querySelectorAll('.manPicture')){	
-		 var id = target.getAttribute('data-id');
-		 
-		 target.style.backgroundImage="url('"+contextPath+"/member/getPicture.do?id="+id+"')";
-		 target.style.backgroundPosition="center";
-		 target.style.backgroundRepeat="no-repeat";
-		 target.style.backgroundSize="cover";
-	}
-}	
+/**
+ * 
+ */
 
-//팝업창들 뛰우기
-//새로운 Window창을 Open할 경우 사용되는 함수 ( arg : 주소 , 창타이틀 , 넓이 , 길이 )
+function MemberPictureThumb(contextPath){
+	for(var target of document.querySelectorAll('.manPicture')){
+		var id = target.getAttribute('data-id');
+		
+		target.style.backgroundImage="url('" + contextPath + "/member/getPicture.do?id="+id+"')";
+		target.style.backgroundPosition="center";
+		target.style.backgroundRepeat="no-repeat";
+		target.style.backgroundSize="cover";
+	}
+}
+
+
 function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 	winleft = (screen.width - WinWidth) / 2;
 	wintop = (screen.height - WinHeight) / 2;
@@ -21,15 +23,10 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 	win.focus() ; 
 }
 
-//팝업창 닫기
 function CloseWindow(){
-	
-	window.opener.location.reload(true);		
+	window.opener.location.reload(true);
 	window.close();
 }
-
-
-//리스트업 함수
 
 function list_go(page,url){
 	//alert(page);
@@ -46,64 +43,56 @@ function list_go(page,url){
 	}).submit(); 
 }
 
+var contextPath = "";
 
-var contextPath="";
 
-function summernote_go(target,context){
+function summernote_go(target, context) {
 	
 	contextPath = context;
 	
-	target.summernote({
-		placeholder:'여기에 내용을 적으세요.',
-		lang:'ko-KR',
+	$(target).summernote({
+		placeholder : '여기에 내용을 적으세요',
+		lang : 'ko-KR',
 		height:250,
-		disableResizeEditor: true,
-		callbacks:{
+		disableResizeEditor:true,
+		callbacks: {
 			onImageUpload : function(files, editor, welEditable) {
-				for(var file of files){
-					//alert(file.name);
-					
+				for(var file of files) {
 					if(file.name.substring(file.name.lastIndexOf(".")+1).toUpperCase() != "JPG"){
-						alert("JPG 이미지형식만 가능합니다.");
+						alert("JPG 형식만 가능합닏");
 						return;
 					}
 					if(file.size > 1024*1024*5){
-						alert("이미지는 5MB 미만입니다.");
+						alert("이미지는 5MB 미만입니다");
 						return;
-					}	
-					
+					}
 				}
 				
+				//유효성(이미지파일 전체가 위에 for문에 걸리지 않으면 이미지 보냄)
 				for (var file of files) {
-					sendFile(file,this);
+					sendFile(file, this);
 				}
 			},
 			onMediaDelete : function(target) {
-				//alert(target[0].src);
-				deleteFile(target[0].src);	
+				deleteFile(target[0].src);
 			}
 		}
 	});
 }
 
-
-
 function sendFile(file, el) {
 	var form_data = new FormData();
-	form_data.append("file", file); 
+	form_data.append("file", file);
 	$.ajax({
-		url: contextPath+'/uploadImg.do',
-    	data: form_data,
-    	type: "POST",	    	
-    	contentType: false,	    	
-    	processData: false,
-    	success: function(img_url) {
-    		//alert(img_url);
-    		$(el).summernote('editor.insertImage', img_url);
-    	},
-    	error:function(){
-    		alert(file.name+" 업로드에 실패했습니다.");
-    	}
+		url : contextPath + "/uploadImg.do",
+		data : form_data,
+		type : "POST",
+		contentType : false,
+		processData : false,
+		success : function(img_url) {
+        	//항상 업로드된 파일의 url이 있어야 한다.
+			$(el).summernote('editor.insertImage', img_url);
+		}
 	});
 }
 
@@ -114,7 +103,7 @@ function deleteFile(src) {
 	var fileData = {fileName:fileName};
 	
 	$.ajax({
-		url:contextPath+"/deleteImg.do",
+		url: contextPath + "/deleteImg.do",
 		data : JSON.stringify(fileData),
 		type:"post",
 		contentType:"application/json",
@@ -127,8 +116,8 @@ function deleteFile(src) {
 	});
 }
 
-//RESTful error 처리
-function AjaxErrorSecurityRedirectHandler(status){
+//restful error 처리
+function AjaxErrorSecurityRedirectHandler(status) {
 	if (status == "302") {
 		alert("세션이 만료되었습니다.\n로그인 하세요.");
 		location.reload();
@@ -143,6 +132,14 @@ function AjaxErrorSecurityRedirectHandler(status){
 	}
 
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-
+		
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED"/>
@@ -19,13 +19,12 @@
 			<tx:method name="get*ForModify" read-only="true"  />
 		</tx:attributes>
 	</tx:advice>
+
 	
-	
-	<config>
-				
+	<config>		
 		<pointcut expression="execution(public * kr.or.ddit.service..*(..))"
 				  id="servicePublicMethod"/>
-		<advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod"/>		
+		<advisor advice-ref="txAdvice" pointcut-ref="servicePublicMethod"/>	
 	</config>
 	
 	<config>
@@ -33,10 +32,5 @@
 				  id="jspServicePublicMethod"/>
 		<advisor advice-ref="txAdvice" pointcut-ref="jspServicePublicMethod"/>
 	</config>
+	
 </beans:beans>
-
-
-
-
-
-

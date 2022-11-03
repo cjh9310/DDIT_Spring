@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.jsp.command.Criteria;
 import com.jsp.dto.BoardVO;
-import com.jsp.dto.NoticeVO;
 
 public interface BoardDAO {
 	

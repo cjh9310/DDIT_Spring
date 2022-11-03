@@ -18,11 +18,12 @@
 	<beans:bean id="loginFailureHandler"
 	            class="kr.or.ddit.security.LoginFailureHandler"
 	            />	            
+			 	       
 	<!-- 세션동기화 -->
 	<beans:bean id="sessionRegistry" 
  		class="org.springframework.security.core.session.SessionRegistryImpl"
  	/>
- 	        
+ 	     
 	<!-- 인증 -->
 	<authentication-manager>
 		<authentication-provider ref="customAuthenticationProvider" />
@@ -59,17 +60,14 @@
 				 invalidate-session="true"
 				 logout-success-url="/"
 				 delete-cookies="JSESSIONID"
-				  />
-		<session-management invalid-session-url="/common/loginTimeOut" >
+				 />
+		 <session-management invalid-session-url="/common/loginTimeOut" >
 			<concurrency-control					
 				expired-url="/common/loginExpired"
 				max-sessions="1"
 				session-registry-ref="sessionRegistry"
-								
 			/>		
 		</session-management>	
-		
-		 
 	</http>
 
 

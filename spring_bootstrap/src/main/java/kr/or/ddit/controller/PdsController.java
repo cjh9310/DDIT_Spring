@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,36 +105,34 @@ public class PdsController {
 	
 	@RequestMapping("/getFile")
 	public String getFile(int ano,HttpServletRequest request, 
-								  HttpServletResponse response,Model model) throws Exception {
+								  Model model) throws Exception {
 		
 		String url="downloadFile";
 		
 		AttachVO attach = service.getAttachByAno(ano);
 		
-
 		model.addAttribute("savedPath", attach.getUploadPath());
-		model.addAttribute("fileName", attach.getFileName());		
-	
+		model.addAttribute("fileName",attach.getFileName());
+		
 		return url;
 	}
-	
 	
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyForm(ModelAndView mnv, int pno) throws Exception {
 		String url = "pds/modify";
-
+		
 		PdsVO pds = service.getPds(pno);
 		
-		mnv.addObject("pds", pds);
+		mnv.addObject("pds",pds);
 		mnv.setViewName(url);
-
+		
 		return mnv;
 	}
 	
 	@RequestMapping("/modify")
 	public String modifyPOST(PdsModifyCommand modifyReq,
-							 HttpServletRequest request,
-							 RedirectAttributes rttr) throws Exception {
+			                 HttpServletRequest request,
+			                 RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/pds/detail.do";
 		
 		// 파일 삭제
@@ -143,45 +140,45 @@ public class PdsController {
 			for (int ano : modifyReq.getDeleteFile()) {
 				AttachVO attach = service.getAttachByAno(ano);
 				
-				File deleteFile
+				File deleteFile 
 						= new File(attach.getUploadPath(), attach.getFileName());
 				
 				if (deleteFile.exists()) {
-					deleteFile.delete();  // File 삭제
+					deleteFile.delete(); // File 삭제
 				}
 				service.removeAttachByAno(ano); // DB 삭제
+				
 			}
 		}
+			
+		//file 저장 -> List<AttachVO>
+		List<AttachVO> attachList 
+		= MultipartFileUploadResolver.fileUpload(modifyReq.getUploadFile(), fileUploadPath);
 		
-		// file 저장 -> List<AttachVO>
-		List<AttachVO> attachList
-			= MultipartFileUploadResolver.fileUpload(modifyReq.getUploadFile(), fileUploadPath);
-		
-		// DB
-		PdsVO pds = modifyReq.toPdsVO();
-		pds.setAttachList(attachList);
+		//DB 
+		PdsVO pds = modifyReq.toPdsVO();						
+		pds.setAttachList(attachList);		
 		
 		pds.setTitle(HTMLInputFilter.htmlSpecialChars(pds.getTitle()));
 		
 		service.modify(pds);
 		
-		rttr.addFlashAttribute("from","modify");
-		rttr.addAttribute("pno",pds.getPno());
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("pno", pds.getPno());
+		
 		return url;
 	}
 	
 	@RequestMapping("/remove")
 	public String remove(int pno, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/pds/detail.do";
-		
+
 		// 첨부파일 삭제
 		List<AttachVO> attachList = service.getPds(pno).getAttachList();
-		if(attachList != null) {
+		if (attachList != null) {
 			for (AttachVO attach : attachList) {
 				String uuidFileName = service.getAttachByAno(attach.getAno()).getFileName();
-				
-				
-				File target = new File(attach.getUploadPath(), attach.getFileName());
+				File target = new File(attach.getUploadPath(), uuidFileName);
 				if (target.exists()) {
 					target.delete();
 				}
@@ -191,15 +188,12 @@ public class PdsController {
 		// DB삭제
 		service.remove(pno);
 		
-		rttr.addFlashAttribute("from","remove");
-		rttr.addAttribute("pno",pno);
+		
+		rttr.addFlashAttribute("from", "remove");
+		rttr.addAttribute("pno", pno);
+		
 		return url;
 	}
-	
-	
-	
-	
-	
 }
 
 

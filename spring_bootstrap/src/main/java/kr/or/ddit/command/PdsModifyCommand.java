@@ -8,6 +8,8 @@ public class PdsModifyCommand extends PdsRegistCommand{
 
 	private int pno;
 	private List<Integer> deleteFile;
+	
+	
 	public int getPno() {
 		return pno;
 	}
@@ -22,10 +24,11 @@ public class PdsModifyCommand extends PdsRegistCommand{
 	}
 	
 	@Override
-	public PdsVO toPdsVO() {
-		PdsVO pds = super.toPdsVO();    
-		pds.setPno(pno);
+	public PdsVO toPdsVO(){
+		PdsVO pds = super.toPdsVO();
+		pds.setPno(pno);	
 		
 		return pds;
 	}
+	
 }

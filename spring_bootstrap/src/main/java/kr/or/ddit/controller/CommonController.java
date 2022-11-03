@@ -70,20 +70,18 @@ public class CommonController {
 	public void accessDenied() {}
 	
 	@RequestMapping("/common/loginTimeOut")
-	public String loginTimeOut(Model model)throws Exception {
+	public String loginTimeOut(Model model) throws Exception {
+		String url = "security/sessionOut";
 		
-		String url="security/sessionOut";
-		
-		model.addAttribute("message","세션이 만료되었습니다.\\n다시 로그인 하세요!");
+		model.addAttribute("message", "세션이 만료되었습니다.\\n다시 로그인하세요");
 		return url;
 	}
 	
 	@RequestMapping("/common/loginExpired")
-	public String loginExpired(Model model)throws Exception {
+	public String loginExpired(Model model) throws Exception {
+		String url = "security/sessionOut";
 		
-		String url="security/sessionOut";
-		
-		model.addAttribute("message","다른 장치에서 로그인이 되었습니다.\\n로그아웃 합니다!");
+		model.addAttribute("message", "다른 장치에서 로그인이 되었습니다.\\n로그아웃합니다!");
 		return url;
 	}
 	

@@ -36,11 +36,10 @@
 		  p:configLocation="classpath:kr/or/ddit/mybatis/config/sqlConfig.xml"
 		  p:mapperLocations="classpath:kr/or/ddit/mybatis/mappers/*-Mapper.xml"
 	/>	
-	
 		 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
 		  c:sqlSessionFactory-ref="sqlSessionFactory"
-		  />	
+	/>	
 		   
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"

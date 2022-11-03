@@ -64,6 +64,7 @@
 		from pds 
 		where pno=#{pno}
 	</select>
+	
 	<select id="selectPdsByImage"  resultType="pds">
 		select * 
 		from pds 

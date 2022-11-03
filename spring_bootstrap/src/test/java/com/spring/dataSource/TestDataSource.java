@@ -62,6 +62,6 @@ public class TestDataSource {
 		rs.close();
 		stmt.close();
 		
-		Assert.assertEquals(3, memberList.size());
+		Assert.assertEquals(8, memberList.size());
 	}
 }

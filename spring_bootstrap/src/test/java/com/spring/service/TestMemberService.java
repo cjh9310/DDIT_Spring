@@ -33,12 +33,12 @@ public class TestMemberService {
 		cri.setPerPageNum(10);
 		
 		List<MemberVO> memberList 
-		=(List<MemberVO>)memberService.getMemberList(cri).get("memberList");
+			=(List<MemberVO>)memberService.getMemberList(cri).get("memberList");
 		
 		if(memberList!=null) for(MemberVO member : memberList)
 			System.out.println(member);
 		
-		Assert.assertEquals(3, memberList.size());
+		Assert.assertEquals(6, memberList.size());
 	}
 
 }

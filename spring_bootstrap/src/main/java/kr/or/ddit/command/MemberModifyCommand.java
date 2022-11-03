@@ -5,16 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jsp.dto.MemberVO;
 
 public class MemberModifyCommand {
-	
-
-	private String id;  //아이디
-	private String pwd; //패스워드
-	private String name; //이름
-	private String phone; //전화번호
-	private String email;  //이메일
-	private String authority; //권한
-	private MultipartFile picture; // 사진파일	
-	private String uploadPicture; // 변경된 사진 파일명.
+	private String id;
+	private String pwd;
+	private String name;
+	private String phone;
+	private String email;
+	private String authority;
+	private MultipartFile picture;
+	private String uploadPicture;
 	
 	public String getId() {
 		return id;
@@ -73,9 +71,7 @@ public class MemberModifyCommand {
 		member.setPhone(this.phone.replace("-", ""));
 		member.setEmail(this.email);
 		member.setAuthority(this.authority);
-			
+		
 		return member;
 	}
-	
-	
 }

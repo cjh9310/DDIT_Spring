@@ -15,21 +15,19 @@ import com.jsp.dto.MemberVO;
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler{
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+	public void onAuthenticationSuccess(HttpServletRequest request, 
+										HttpServletResponse response,
 										Authentication authentication) throws ServletException, IOException {
 		
-		User user = (User)authentication.getDetails();	
+		User user = (User) authentication.getDetails();
 		
-		// session 저장
-		MemberVO loginUser = user.getMemberVO();  
-		HttpSession session = request.getSession();		
-		
+		//session 저장
+		MemberVO loginUser = user.getMemberVO();
+		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", loginUser);
 		session.setMaxInactiveInterval(60*6);
 		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
-	
-	
 
 }

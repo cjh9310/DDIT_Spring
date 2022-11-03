@@ -16,18 +16,16 @@ import com.jsp.exception.NotFoundIdException;
 import com.jsp.service.MemberService;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-
+	
 	private MemberService memberService;
 	public void setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
-	
+
 	@Override
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
-		String login_id = (String) auth.getPrincipal(); // 로그인 시도한 ID를 가져온다
-		String login_pwd = (String) auth.getCredentials(); // 로그인 시도한 Password 를 가져온다.
-		
+		String login_id = (String) auth.getPrincipal();
+		String login_pwd = (String) auth.getCredentials();
 		
 		try {
 			memberService.login(login_id, login_pwd);
@@ -42,9 +40,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			
 			if (invalidCheck) {
 				UsernamePasswordAuthenticationToken result
-							= new UsernamePasswordAuthenticationToken(
-										authUser.getUsername(), authUser.getPassword(), 
-										authUser.getAuthorities());
+				= new UsernamePasswordAuthenticationToken(
+							authUser.getUsername(), 
+							authUser.getPassword(), 
+							authUser.getAuthorities());
 				// 전달할 내용을 설정한 후
 				result.setDetails(authUser);
 				// 리턴한다. successHandler로 전송된다.
@@ -53,14 +52,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			}
 			
 		} catch (NotFoundIdException e) {
-			throw new UsernameNotFoundException("존재하지 않는 아이디입니다.");
+			throw new UsernameNotFoundException("해당되는 아이디가 존재하지 않습니다");
 		} catch (InvalidPasswordException e) {
-			throw new BadCredentialsException("패스워드가 일치하지 않습니다.");
+			throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BadCredentialsException("서버 에러");
 		}
-
 		
 		return null;
 	}
@@ -71,9 +69,3 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	}
 
 }
-
-
-
-
-
-
